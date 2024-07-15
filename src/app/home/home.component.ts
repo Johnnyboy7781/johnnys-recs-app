@@ -17,7 +17,7 @@ export class HomeComponent {
   #http = inject(HttpClient);
 
   test() {
-    this.#http.get(`${this.backendUrl}/api/v1/hello`).pipe(
+    this.#http.get(`${this.backendUrl}/hello`).pipe(
       tap((data) => console.log(data))
     ).subscribe();
   }

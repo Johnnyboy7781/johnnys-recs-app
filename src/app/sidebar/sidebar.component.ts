@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialog } from '@angular/material/dialog'
+import { ListInfoDialog } from './list-info-dialog/list-info-dialog.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,5 +14,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
+
+  #dialog = inject(MatDialog);
+
+  openInfoDialog(): void {
+    const dialogRef = this.#dialog.open(ListInfoDialog, { autoFocus: false });
+  }
 
 }

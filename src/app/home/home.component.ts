@@ -1,7 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { tap } from 'rxjs';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +6,7 @@ import { tap } from 'rxjs';
   imports: [],
   providers: [],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.scss'
 })
 export class HomeComponent {
 

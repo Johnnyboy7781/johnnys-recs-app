@@ -1,0 +1,15 @@
+.app-container {
+    --sideabar-width: 17rem;
+
+    display: flex;
+    width: 100%;
+
+    & app-sidebar {
+        background-color: grey;
+        width: var(--sideabar-width);
+    }
+
+    & app-rec-list {
+        width: calc(100% - var(--sideabar-width));
+    }
+}

@@ -12,13 +12,5 @@ import { tap } from 'rxjs';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  backendUrl = environment.backendUrl;
-  
-  #http = inject(HttpClient);
 
-  test() {
-    this.#http.get(`${this.backendUrl}/hello`).pipe(
-      tap((data) => console.log(data))
-    ).subscribe();
-  }
 }

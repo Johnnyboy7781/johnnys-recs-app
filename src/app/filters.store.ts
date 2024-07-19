@@ -1,16 +1,16 @@
 import { patchState, signalStore, withMethods, withState } from "@ngrx/signals"
 
 type FilterStoreState = {
-    region?: string,
-    subregion?: string,
-    numStars?: number,
+    region: number,
+    subregion: number,
+    numStars: number,
     hasSuperlative?: boolean
 }
 
 const initialState: FilterStoreState = {
-    region: undefined,
-    subregion: undefined,
-    numStars: undefined,
+    region: -1,
+    subregion: -1,
+    numStars: -1,
     hasSuperlative: undefined
 }
 

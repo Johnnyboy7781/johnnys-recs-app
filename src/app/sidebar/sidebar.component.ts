@@ -1,27 +1,48 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog'
 import { ListInfoDialog } from './list-info-dialog/list-info-dialog.component';
 import { RecsService } from '../recs.service';
-import { Region } from '../data-types';
-import { Observable, tap } from 'rxjs';
+import { Region, Subregion } from '../data-types';
+import { tap } from 'rxjs';
+import { FilerStore } from '../filters.store';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
   imports: [ MatButtonModule, MatFormFieldModule, MatSelectModule, MatCheckboxModule ],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrl: './sidebar.component.scss',
+  animations: [
+    trigger(
+      'inOut',
+      [
+        transition(
+          ':enter',
+          [
+            style({ opacity: 0 }),
+            animate(
+              '750ms ease-out',
+              style({ opacity: 1 })
+            )
+          ]
+        )
+      ]
+    )
+  ]
 })
 export class SidebarComponent implements OnInit {
 
   regions!: Region[];
+  subregions: Subregion[] | undefined;
 
   #dialog = inject(MatDialog);
   #recsService = inject(RecsService);
+  filtersStore = inject(FilerStore);
 
   ngOnInit(): void {
       this.#recsService.getRegions()
@@ -31,7 +52,17 @@ export class SidebarComponent implements OnInit {
   }
 
   openInfoDialog(): void {
-    const dialogRef = this.#dialog.open(ListInfoDialog, { autoFocus: false });
+    this.#dialog.open(ListInfoDialog, { autoFocus: false });
+  }
+
+  onSelectionChange(event: MatSelectChange): void {
+    this.filtersStore.updateState({ region: event.value });
+    if (event.source.ariaLabel === 'region') {
+      this.#recsService.getSubregionsByRegion(event.value)
+        .pipe(
+          tap((subregions) => this.subregions = subregions)
+        ).subscribe();
+    }
   }
 
 }

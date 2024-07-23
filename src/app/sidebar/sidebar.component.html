@@ -9,7 +9,7 @@
     <div class="form-container">
         <mat-form-field appearance="outline">
             <mat-label>Region</mat-label>
-            <mat-select aria-label="region" (selectionChange)="onSelectionChange($event)">
+            <mat-select [value]="filtersStore.region()" (selectionChange)="onRegionSelectionChange($event)">
                 @for (region of regions; track region.id) {
                     <mat-option [value]="region.id">{{region.name}}</mat-option>
                 }
@@ -20,7 +20,7 @@
             <div [@slideIn]>
                 <mat-form-field appearance="outline">
                     <mat-label>Subregion</mat-label>
-                    <mat-select [value]="-1">
+                    <mat-select [value]="filtersStore.subregion()" (selectionChange)="filtersStore.updateState({subregion: $event.value})">
                         <mat-option [value]="-1">Any</mat-option>
                         @for (subregion of subregions; track subregion.id) {
                             <mat-option [value]="subregion.id">{{subregion.name}}</mat-option>
@@ -29,8 +29,8 @@
                 </mat-form-field>
             
                 <mat-form-field appearance="outline">
-                    <mat-label>Stars #</mat-label>
-                    <mat-select [value]="-1">
+                    <mat-label># Stars</mat-label>
+                    <mat-select [value]="filtersStore.numStars()" (selectionChange)="filtersStore.updateState({numStars: $event.value})">
                         <mat-option [value]="-1">Any</mat-option>
                         <mat-option [value]="0">0</mat-option>
                         <mat-option [value]="1">1</mat-option>

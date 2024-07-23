@@ -52,14 +52,16 @@ export class SidebarComponent implements OnInit {
     this.#dialog.open(ListInfoDialog, { autoFocus: false });
   }
 
-  onSelectionChange(event: MatSelectChange): void {
-    this.filtersStore.updateState({ region: event.value });
-    if (event.source.ariaLabel === 'region') {
-      this.#recsService.getSubregionsByRegion(event.value)
-        .pipe(
-          tap((subregions) => this.subregions = subregions)
-        ).subscribe();
-    }
+  onRegionSelectionChange(event: MatSelectChange): void {
+    this.filtersStore.updateState({ 
+      region: event.value,
+      subregion: -1
+    });
+
+    this.#recsService.getSubregionsByRegion(event.value)
+      .pipe(
+        tap((subregions) => this.subregions = subregions)
+      ).subscribe();
   }
 
 }

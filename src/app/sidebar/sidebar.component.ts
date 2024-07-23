@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,6 +10,7 @@ import { Region, Subregion } from '../data-types';
 import { tap } from 'rxjs';
 import { FilerStore } from '../filters.store';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import { getState } from '@ngrx/signals';
 
 @Component({
   selector: 'app-sidebar',
@@ -40,6 +41,12 @@ export class SidebarComponent implements OnInit {
   #dialog = inject(MatDialog);
   #recsService = inject(RecsService);
   filtersStore = inject(FilerStore);
+
+  constructor() {
+      effect(() => {
+        this.#recsService.loadListData(getState(this.filtersStore))
+      })
+  }
 
   ngOnInit(): void {
       this.#recsService.getRegions()

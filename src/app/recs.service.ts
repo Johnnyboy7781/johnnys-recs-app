@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Region, Subregion } from './data-types';
 import { environment } from '../environments/environment';
 import { Observable } from 'rxjs';
+import { FilterStoreState } from './filters.store';
 
 @Injectable({ providedIn: 'root' })
 export class RecsService {
@@ -17,6 +18,10 @@ export class RecsService {
 
   getSubregionsByRegion(id: number): Observable<Subregion[]> {
     return this.#http.get<Subregion[]>(`${this.backendUrl}/subregions/region/${id}`);
+  }
+
+  loadListData(params: FilterStoreState): void {
+    console.dir(params);
   }
 
 }

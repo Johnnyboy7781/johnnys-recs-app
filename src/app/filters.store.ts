@@ -1,6 +1,6 @@
 import { patchState, signalStore, withMethods, withState } from "@ngrx/signals"
 
-type FilterStoreState = {
+export type FilterStoreState = {
     region: number,
     subregion: number,
     numStars: number,

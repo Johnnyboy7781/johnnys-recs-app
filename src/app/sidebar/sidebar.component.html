@@ -38,7 +38,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-checkbox [@slideIn] color="primary">Has superlative</mat-checkbox>
+                <mat-checkbox [value]="filtersStore.hasSuperlative().toString()" (change)="filtersStore.updateState({hasSuperlative: $event.checked})" [@slideIn] color="primary">Has superlative</mat-checkbox>
             </div>
         }
     </div>

@@ -1,0 +1,22 @@
+.list-container {
+    width: min(90%, 80rem);
+    margin-inline: 2rem;
+}
+
+.empty-list {
+    color: #a4a4a6;
+    width: max-content;
+    margin: 10dvh auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & .empty-icon {
+        transform: scale(2);
+        margin-bottom: 1rem;
+    }
+
+    & .empty-title {
+        font-weight: normal;
+    }
+}

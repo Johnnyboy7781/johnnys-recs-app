@@ -9,7 +9,7 @@ import { RecsService } from '../recs.service';
 import { Region, Subregion } from '../data-types';
 import { tap } from 'rxjs';
 import { FilerStore } from '../filters.store';
-import { animate, style, transition, trigger } from '@angular/animations';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-sidebar',
@@ -18,17 +18,14 @@ import { animate, style, transition, trigger } from '@angular/animations';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
   animations: [
-    trigger(
-      'inOut',
-      [
-        transition(
-          ':enter',
-          [
-            style({ opacity: 0 }),
-            animate(
-              '750ms ease-out',
-              style({ opacity: 1 })
-            )
+    trigger('slideIn', [
+        transition('* => *', [
+            query(':enter', [
+              style({ opacity: 0, transform: 'translateX(-15px)' }),
+              stagger(100, [
+                animate('350ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
+              ])
+            ], { optional: true })
           ]
         )
       ]

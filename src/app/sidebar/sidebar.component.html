@@ -20,7 +20,8 @@
             <div [@slideIn]>
                 <mat-form-field appearance="outline">
                     <mat-label>Subregion</mat-label>
-                    <mat-select>
+                    <mat-select [value]="-1">
+                        <mat-option [value]="-1">Any</mat-option>
                         @for (subregion of subregions; track subregion.id) {
                             <mat-option [value]="subregion.id">{{subregion.name}}</mat-option>
                         }
@@ -29,7 +30,8 @@
             
                 <mat-form-field appearance="outline">
                     <mat-label>Stars #</mat-label>
-                    <mat-select>
+                    <mat-select [value]="-1">
+                        <mat-option [value]="-1">Any</mat-option>
                         <mat-option [value]="0">0</mat-option>
                         <mat-option [value]="1">1</mat-option>
                         <mat-option [value]="2">2</mat-option>

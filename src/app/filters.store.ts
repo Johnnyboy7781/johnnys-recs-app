@@ -4,14 +4,14 @@ type FilterStoreState = {
     region: number,
     subregion: number,
     numStars: number,
-    hasSuperlative?: boolean
+    hasSuperlative: boolean
 }
 
 const initialState: FilterStoreState = {
     region: -1,
     subregion: -1,
     numStars: -1,
-    hasSuperlative: undefined
+    hasSuperlative: false
 }
 
 export const FilerStore = signalStore(

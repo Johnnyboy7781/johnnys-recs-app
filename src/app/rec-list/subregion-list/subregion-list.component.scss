@@ -1,0 +1,23 @@
+.subregion {
+    margin-bottom: 1rem;
+}
+
+.list-container {
+
+    mat-expansion-panel {
+        background-color: #453648;
+    }
+
+    & .list-header-container {
+        height: 4rem;
+
+        & h3 {
+            font-weight: 400;
+        }
+
+        & h4 {
+            font-weight: normal;
+            color: #bdbdbd;
+        }
+    }
+}

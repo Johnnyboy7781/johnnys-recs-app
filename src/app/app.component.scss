@@ -3,7 +3,7 @@
 
     display: flex;
     width: 100%;
-    padding: 3rem 1rem 0 1rem;
+    padding: 3rem 1rem 0 clamp(40px, 3.1%, 170px);
 
     & app-sidebar {
         width: var(--sideabar-width);

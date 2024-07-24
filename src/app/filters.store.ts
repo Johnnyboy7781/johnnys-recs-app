@@ -14,7 +14,7 @@ const initialState: FilterStoreState = {
     hasSuperlative: false
 }
 
-export const FilerStore = signalStore(
+export const FilterStore = signalStore(
     { providedIn: 'root' },
 
     withState(initialState),

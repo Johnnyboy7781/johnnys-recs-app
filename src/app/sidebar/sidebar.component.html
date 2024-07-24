@@ -9,20 +9,20 @@
     <div class="form-container">
         <mat-form-field appearance="outline">
             <mat-label>Region</mat-label>
-            <mat-select [value]="filtersStore.region()" (selectionChange)="onRegionSelectionChange($event)">
-                @for (region of regions; track region.id) {
+            <mat-select [value]="filterStore.region()" (selectionChange)="onRegionSelectionChange($event)">
+                @for (region of recsService.regions(); track region.id) {
                     <mat-option [value]="region.id">{{region.name}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
 
-        @if (filtersStore.region() !== -1) {
+        @if (filterStore.region() !== -1) {
             <div [@slideIn]>
                 <mat-form-field appearance="outline">
                     <mat-label>Subregion</mat-label>
-                    <mat-select [value]="filtersStore.subregion()" (selectionChange)="filtersStore.updateState({subregion: $event.value})">
+                    <mat-select [value]="filterStore.subregion()" (selectionChange)="filterStore.updateState({subregion: $event.value})">
                         <mat-option [value]="-1">Any</mat-option>
-                        @for (subregion of subregions; track subregion.id) {
+                        @for (subregion of recsService.subregions(); track subregion.id) {
                             <mat-option [value]="subregion.id">{{subregion.name}}</mat-option>
                         }
                     </mat-select>
@@ -30,7 +30,7 @@
             
                 <mat-form-field appearance="outline">
                     <mat-label># Stars</mat-label>
-                    <mat-select [value]="filtersStore.numStars()" (selectionChange)="filtersStore.updateState({numStars: $event.value})">
+                    <mat-select [value]="filterStore.numStars()" (selectionChange)="filterStore.updateState({numStars: $event.value})">
                         <mat-option [value]="-1">Any</mat-option>
                         <mat-option [value]="0">0</mat-option>
                         <mat-option [value]="1">1</mat-option>
@@ -38,7 +38,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-checkbox [value]="filtersStore.hasSuperlative().toString()" (change)="filtersStore.updateState({hasSuperlative: $event.checked})" [@slideIn] color="primary">Has superlative</mat-checkbox>
+                <mat-checkbox [value]="filterStore.hasSuperlative().toString()" (change)="filterStore.updateState({hasSuperlative: $event.checked})" [@slideIn] color="primary">Has superlative</mat-checkbox>
             </div>
         }
     </div>

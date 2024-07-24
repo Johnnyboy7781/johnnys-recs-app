@@ -6,9 +6,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog'
 import { ListInfoDialog } from './list-info-dialog/list-info-dialog.component';
 import { RecsService } from '../recs.service';
-import { Region, Subregion } from '../data-types';
-import { tap } from 'rxjs';
-import { FilerStore } from '../filters.store';
+import { FilterStore } from '../filters.store';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { getState } from '@ngrx/signals';
 
@@ -35,24 +33,18 @@ import { getState } from '@ngrx/signals';
 })
 export class SidebarComponent implements OnInit {
 
-  regions!: Region[];
-  subregions: Subregion[] | undefined;
-
   #dialog = inject(MatDialog);
-  #recsService = inject(RecsService);
-  filtersStore = inject(FilerStore);
+  recsService = inject(RecsService);
+  filterStore = inject(FilterStore);
 
   constructor() {
       effect(() => {
-        this.#recsService.loadListData(getState(this.filtersStore))
+        this.recsService.loadListData(getState(this.filterStore))
       })
   }
 
   ngOnInit(): void {
-      this.#recsService.getRegions()
-        .pipe(
-          tap((regions) => this.regions = regions)
-        ).subscribe();
+      this.recsService.getRegions();
   }
 
   openInfoDialog(): void {
@@ -60,15 +52,12 @@ export class SidebarComponent implements OnInit {
   }
 
   onRegionSelectionChange(event: MatSelectChange): void {
-    this.filtersStore.updateState({ 
+    this.filterStore.updateState({ 
       region: event.value,
       subregion: -1
     });
 
-    this.#recsService.getSubregionsByRegion(event.value)
-      .pipe(
-        tap((subregions) => this.subregions = subregions)
-      ).subscribe();
+    this.recsService.getSubregionsByRegion(event.value);
   }
 
 }

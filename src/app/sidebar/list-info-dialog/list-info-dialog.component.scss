@@ -1,5 +1,5 @@
 .dialog-container {
-    width: 60vw;
+    width: 40vw;
     padding: 1rem;
 }
 
@@ -12,16 +12,21 @@
 .info-container {
     display: flex;
     flex-direction: column;
+    margin-top: 0.5rem;
     gap: 1.2rem;
 
     & .info-section {
-        & :not(h3) {
-            margin-left: 1rem;
+        & * {
+            margin-inline: 0.5rem;
         }
 
         & h3 {
-            font-weight:500;
+            font-weight:400;
             margin-bottom: 0.2rem;
+        }
+
+        & p {
+            color: rgb(219, 219, 219);
         }
 
         & .star-info {

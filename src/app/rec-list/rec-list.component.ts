@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { RecsService } from '../recs.service';
+import { FilterStore } from '../filters.store';
 
 @Component({
   selector: 'app-rec-list',
@@ -9,5 +11,6 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './rec-list.component.scss'
 })
 export class RecListComponent {
-
+  recService = inject(RecsService);
+  filterStore = inject(FilterStore);
 }

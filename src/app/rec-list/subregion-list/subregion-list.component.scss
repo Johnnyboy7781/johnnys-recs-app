@@ -4,20 +4,48 @@
 
 .list-container {
 
-    mat-expansion-panel {
+    & .place {
         background-color: #453648;
-    }
+    
+        &-header {
+            height: 4rem;
 
-    & .list-header-container {
-        height: 4rem;
+            & h3 {
+                font-weight: 400;
+            }
 
-        & h3 {
-            font-weight: 400;
+            & h4 {
+                font-weight: normal;
+                color: #bdbdbd;
+            }
         }
 
-        & h4 {
+        &-body {
+            display: flex;
             font-weight: normal;
-            color: #bdbdbd;
+            color: #dfdfdf;
+
+            &-desc {
+                flex: 2;
+            }
+
+            &-info {
+                flex: 1;
+
+                &-open {
+                    &.open {
+                        color: rgb(1, 185, 1);
+                    }
+
+                    &.closed {
+                        color: red;
+                    }
+                }
+
+                &-label {
+                    font-weight: bold;
+                }
+            }
         }
     }
 }

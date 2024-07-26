@@ -1,13 +1,22 @@
 <h2 class="subregion">The Fan</h2>
 
 <mat-accordion class="list-container">
-    <mat-expansion-panel>
-        <mat-expansion-panel-header class="list-header-container">
-            <div class="place-titles">
+    <mat-expansion-panel class="place" expanded="{{true}}">
+        <mat-expansion-panel-header class="place-header">
+            <div class="place-header-titles">
                 <h3>Celladora</h3>
                 <h4>Wine shop</h4>
             </div>
         </mat-expansion-panel-header>
-        <p>Yo yo yo</p>
+        <div class="place-body">
+            <div class="place-body-desc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, cum similique expedita ab asperiores tenetur autem delectus! Dolorem provident, quae eum veritatis a commodi, voluptas porro culpa dignissimos libero et.
+            </div>
+            <div class="place-body-info">
+                <p class="place-body-info-open open">Open now</p>
+                <p><span class="place-body-info-label">Address:</span> 123 Main St.</p>
+                <p><span class="place-body-info-label">Phone:</span> 123-456-7890</p>
+            </div>
+        </div>
     </mat-expansion-panel>
 </mat-accordion>

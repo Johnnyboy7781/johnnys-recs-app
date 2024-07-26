@@ -1,38 +1,58 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialog } from '@angular/material/dialog'
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDialog } from '@angular/material/dialog';
 import { ListInfoDialog } from './list-info-dialog/list-info-dialog.component';
 import { RecsService } from '../recs.service';
 import { FilterStore } from '../filters.store';
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { getState } from '@ngrx/signals';
 import { ListStore } from '../list.store';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [ MatButtonModule, MatFormFieldModule, MatSelectModule, MatCheckboxModule ],
+  imports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatDividerModule,
+  ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
   animations: [
     trigger('slideIn', [
-        transition('* => *', [
-            query(':enter', [
-              style({ opacity: 0, transform: 'translateX(-15px)' }),
-              stagger(100, [
-                animate('250ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
-              ])
-            ], { optional: true })
-          ]
-        )
-      ]
-    )
-  ]
+      transition('* => *', [
+        query(
+          ':enter',
+          [
+            style({ opacity: 0, transform: 'translateX(-15px)' }),
+            stagger(100, [
+              animate(
+                '250ms ease-out',
+                style({ opacity: 1, transform: 'translateX(0)' })
+              ),
+            ]),
+          ],
+          { optional: true }
+        ),
+      ]),
+    ]),
+  ],
 })
 export class SidebarComponent implements OnInit {
+  areSubFiltersDirty = signal<boolean>(false);
 
   #dialog = inject(MatDialog);
   #recsService = inject(RecsService);
@@ -40,13 +60,13 @@ export class SidebarComponent implements OnInit {
   listStore = inject(ListStore);
 
   constructor() {
-      effect(() => {
-        this.#recsService.loadListData(getState(this.filterStore))
-      })
+    effect(() => {
+      this.#recsService.loadListData(getState(this.filterStore));
+    });
   }
 
   ngOnInit(): void {
-      this.#recsService.getRegions();
+    this.#recsService.getRegions();
   }
 
   openInfoDialog(): void {
@@ -54,12 +74,11 @@ export class SidebarComponent implements OnInit {
   }
 
   onRegionSelectionChange(event: MatSelectChange): void {
-    this.filterStore.updateState({ 
+    this.filterStore.updateState({
       region: event.value,
-      subregion: -1
+      subregion: -1,
     });
 
     this.#recsService.getSubregionsByRegion(event.value);
   }
-
 }

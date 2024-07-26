@@ -16,8 +16,11 @@
             </mat-select>
         </mat-form-field>
 
+
         @if (filterStore.region() !== -1) {
             <div [@slideIn]>
+                <mat-divider class="divider"></mat-divider>
+
                 <mat-form-field appearance="outline">
                     <mat-label>Subregion</mat-label>
                     <mat-select [value]="filterStore.subregion()" (selectionChange)="filterStore.updateState({subregion: $event.value})">
@@ -40,7 +43,9 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-checkbox [value]="filterStore.hasSuperlative().toString()" (change)="filterStore.updateState({hasSuperlative: $event.checked})" [@slideIn] color="primary">Has superlative</mat-checkbox>
+                <mat-checkbox class="checkbox" [value]="filterStore.hasSuperlative().toString()" (change)="filterStore.updateState({hasSuperlative: $event.checked})" [@slideIn] color="primary">Has superlative</mat-checkbox>
+
+                <button mat-stroked-button color="primary" (click)="filterStore.resetSubFilters()" [disabled]="filterStore.areSubfiltersDirty()">Clear</button>
             </div>
         }
     </div>

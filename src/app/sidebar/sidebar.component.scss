@@ -5,6 +5,10 @@
     align-items: flex-end;
     gap: 1rem;
 
+    & .form-container {
+        width: min-content;
+    }
+
     & .title {
         font-weight: normal;
     }
@@ -17,5 +21,14 @@
 
     & .info-btn {
         font-size: 1em;
+    }
+
+    & .divider {
+        margin-bottom: 20px;
+    }
+
+    & .checkbox {
+        display: block;
+        margin-bottom: 1rem;
     }
 }

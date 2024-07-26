@@ -36,6 +36,10 @@ export const ListStore = signalStore(
         },
 
         updatePlaces(newPlaces: Place[]): void {
+            if (store.subregions().length === 0) {
+                return;
+            }
+
             const map = new Map<string, Place[]>()
             
             store.subregions().forEach((subregion) => {

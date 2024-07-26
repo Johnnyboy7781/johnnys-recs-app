@@ -10,6 +10,7 @@ import { ListStore } from './list.store';
 export class RecsService {
 
   backendUrl = environment.backendUrl;
+  #loadingSubregions = signal<boolean>(false);
 
   #http = inject(HttpClient);
   #listStore = inject(ListStore);
@@ -22,13 +23,20 @@ export class RecsService {
   }
 
   getSubregionsByRegion(id: number): void {
+    this.#loadingSubregions.set(true);
     this.#http.get<Subregion[]>(`${this.backendUrl}/subregions/region/${id}`)
       .pipe(
         tap((data) => this.#listStore.updateSubregions(data))
-      ).subscribe();
+      ).subscribe({
+        complete: () => {
+          this.#loadingSubregions.set(false)
+        }
+      });
   }
 
-  loadListData(params: FilterStoreState): void {
+  async loadListData(params: FilterStoreState): Promise<void> {
+    await new Promise((resolve) => this.waitForSubregions(resolve));
+
     if (params.region === -1) {
       return;
     }
@@ -42,5 +50,13 @@ export class RecsService {
     this.#http.get<Place[]>(`${this.backendUrl}/places?${queryString}`).pipe(
       tap(data => this.#listStore.updatePlaces(data)),
     ).subscribe();
+  }
+
+  async waitForSubregions(resolve: Function): Promise<void> {
+    if (!this.#loadingSubregions()) {
+      resolve();
+    } else {
+      setTimeout(() => this.waitForSubregions(resolve), 100)
+    }
   }
 }

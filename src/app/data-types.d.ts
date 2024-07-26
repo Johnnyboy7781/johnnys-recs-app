@@ -20,3 +20,5 @@ export type Place = {
     superlative: string | null,
     title: string
 }
+
+export type ListData = [string, Place[]];

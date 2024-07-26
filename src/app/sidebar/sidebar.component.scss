@@ -5,6 +5,10 @@
     align-items: flex-end;
     gap: 1rem;
 
+    & .title {
+        font-weight: normal;
+    }
+
     & .subtitle {
         font-weight: normal;
         font-style: italic;

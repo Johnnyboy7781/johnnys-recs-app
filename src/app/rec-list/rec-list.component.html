@@ -1,16 +1,20 @@
 <div class="list-container">
     @if (filterStore.region() === -1) {
-        <app-subregion-list></app-subregion-list>
-        <!-- <div class="empty-list">
+        <app-subregion-list subregionName="The Fan" [places]="testList"></app-subregion-list>
+        <div class="empty-list">
             <mat-icon class="empty-icon" fontIcon="search"></mat-icon>
             <h3 class="empty-title">Select a region to begin</h3>
-        </div> -->
+        </div>
     } @else if (listStore.places().size === 0) {
         <div class="empty-list">
             <mat-icon class="empty-icon" fontIcon="search_off"></mat-icon>
             <h3 class="empty-title">No places found, try again!</h3>
         </div>
     } @else {
-        <h1>yeah boi</h1>
+        @for (subregionMap of listStore.places(); track subregionMap[0]) {
+            @if (subregionMap[1].length > 0) {
+                <app-subregion-list [subregionName]="subregionMap[0]" [places]="subregionMap[1]"></app-subregion-list>
+            }
+        }
     }
 </div>

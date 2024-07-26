@@ -1,6 +1,9 @@
 .list-container {
+    display: flex;
+    flex-direction: column;
     width: min(90%, 60rem);
     margin-inline: 2rem;
+    gap: 2rem;
 }
 
 .empty-list {

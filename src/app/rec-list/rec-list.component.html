@@ -5,7 +5,7 @@
             <mat-icon class="empty-icon" fontIcon="search"></mat-icon>
             <h3 class="empty-title">Select a region to begin</h3>
         </div> -->
-    } @else if (recService.listData().length === 0) {
+    } @else if (listStore.places().size === 0) {
         <div class="empty-list">
             <mat-icon class="empty-icon" fontIcon="search_off"></mat-icon>
             <h3 class="empty-title">No places found, try again!</h3>

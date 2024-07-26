@@ -9,6 +9,7 @@ import { RecsService } from '../recs.service';
 import { FilterStore } from '../filters.store';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { getState } from '@ngrx/signals';
+import { ListStore } from '../list.store';
 
 @Component({
   selector: 'app-sidebar',
@@ -34,17 +35,18 @@ import { getState } from '@ngrx/signals';
 export class SidebarComponent implements OnInit {
 
   #dialog = inject(MatDialog);
-  recsService = inject(RecsService);
+  #recsService = inject(RecsService);
   filterStore = inject(FilterStore);
+  listStore = inject(ListStore);
 
   constructor() {
       effect(() => {
-        this.recsService.loadListData(getState(this.filterStore))
+        this.#recsService.loadListData(getState(this.filterStore))
       })
   }
 
   ngOnInit(): void {
-      this.recsService.getRegions();
+      this.#recsService.getRegions();
   }
 
   openInfoDialog(): void {
@@ -57,7 +59,7 @@ export class SidebarComponent implements OnInit {
       subregion: -1
     });
 
-    this.recsService.getSubregionsByRegion(event.value);
+    this.#recsService.getSubregionsByRegion(event.value);
   }
 
 }

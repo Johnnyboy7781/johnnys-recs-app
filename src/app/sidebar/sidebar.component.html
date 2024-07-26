@@ -10,7 +10,7 @@
         <mat-form-field appearance="outline">
             <mat-label>Region</mat-label>
             <mat-select [value]="filterStore.region()" (selectionChange)="onRegionSelectionChange($event)">
-                @for (region of recsService.regions(); track region.id) {
+                @for (region of listStore.regions(); track region.id) {
                     <mat-option [value]="region.id">{{region.name}}</mat-option>
                 }
             </mat-select>
@@ -22,8 +22,10 @@
                     <mat-label>Subregion</mat-label>
                     <mat-select [value]="filterStore.subregion()" (selectionChange)="filterStore.updateState({subregion: $event.value})">
                         <mat-option [value]="-1">Any</mat-option>
-                        @for (subregion of recsService.subregions(); track subregion.id) {
-                            <mat-option [value]="subregion.id">{{subregion.name}}</mat-option>
+                        @for (subregion of listStore.subregions(); track subregion) {
+                            @if (subregion) {
+                                <mat-option [value]="subregion.id">{{subregion.name}}</mat-option>
+                            }
                         }
                     </mat-select>
                 </mat-form-field>

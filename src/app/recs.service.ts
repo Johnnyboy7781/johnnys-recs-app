@@ -4,28 +4,27 @@ import { Region, Subregion, Place } from './data-types';
 import { environment } from '../environments/environment';
 import { tap } from 'rxjs';
 import { FilterStoreState } from './filters.store';
+import { ListStore } from './list.store';
 
 @Injectable({ providedIn: 'root' })
 export class RecsService {
 
   backendUrl = environment.backendUrl;
-  listData = signal<Place[]>([]);
-  subregions = signal<Subregion[]>([]);
-  regions = signal<Region[]>([]);
 
   #http = inject(HttpClient);
+  #listStore = inject(ListStore);
 
   getRegions(): void {
     this.#http.get<Region[]>(`${this.backendUrl}/regions`)
       .pipe(
-        tap((data) => this.regions.set(data))
+        tap((data) => this.#listStore.updateRegions(data))
       ).subscribe();
   }
 
   getSubregionsByRegion(id: number): void {
     this.#http.get<Subregion[]>(`${this.backendUrl}/subregions/region/${id}`)
       .pipe(
-        tap((data) => this.subregions.set(data))
+        tap((data) => this.#listStore.updateSubregions(data))
       ).subscribe();
   }
 
@@ -41,8 +40,7 @@ export class RecsService {
       .append("has_superlative", params.hasSuperlative);
 
     this.#http.get<Place[]>(`${this.backendUrl}/places?${queryString}`).pipe(
-      tap(data => this.listData.set(data)),
-      tap(data => console.log(data))
+      tap(data => this.#listStore.updatePlaces(data)),
     ).subscribe();
   }
 }

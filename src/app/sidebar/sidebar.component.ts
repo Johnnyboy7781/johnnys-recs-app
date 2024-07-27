@@ -55,6 +55,8 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class SidebarComponent implements OnInit {
 
+  hasEffectFiredOnce = false;
+
   #dialog = inject(MatDialog);
   #recsService = inject(RecsService);
   filterStore = inject(FilterStore);
@@ -63,7 +65,7 @@ export class SidebarComponent implements OnInit {
   constructor() {
     effect(() => {
       this.#recsService.loadListData(getState(this.filterStore));
-    });
+    }, { allowSignalWrites: true });
   }
 
   ngOnInit(): void {
@@ -75,10 +77,8 @@ export class SidebarComponent implements OnInit {
   }
 
   onRegionSelectionChange(event: MatSelectChange): void {
-    this.filterStore.updateState({
-      region: event.value,
-      subregion: -1,
-    });
+    this.filterStore.updateState({ region: event.value });
+    this.filterStore.resetSubFilters();
 
     this.#recsService.getSubregionsByRegion(event.value);
   }

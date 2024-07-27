@@ -10,7 +10,8 @@ import { ListStore } from './list.store';
 export class RecsService {
 
   backendUrl = environment.backendUrl;
-  #loadingSubregions = signal<boolean>(false);
+  #isLoadingSubregions = signal<boolean>(false);
+  isloadingPlaces = signal<boolean>(false);
 
   #http = inject(HttpClient);
   #listStore = inject(ListStore);
@@ -23,23 +24,25 @@ export class RecsService {
   }
 
   getSubregionsByRegion(id: number): void {
-    this.#loadingSubregions.set(true);
+    this.#isLoadingSubregions.set(true);
     this.#http.get<Subregion[]>(`${this.backendUrl}/subregions/region/${id}`)
       .pipe(
         tap((data) => this.#listStore.updateSubregions(data))
       ).subscribe({
         complete: () => {
-          this.#loadingSubregions.set(false)
+          this.#isLoadingSubregions.set(false)
         }
       });
   }
 
   async loadListData(params: FilterStoreState): Promise<void> {
-    await new Promise((resolve) => this.waitForSubregions(resolve));
-
     if (params.region === -1) {
       return;
     }
+
+    this.isloadingPlaces.set(true);
+
+    await new Promise((resolve) => this.waitForSubregions(resolve));
 
     const queryString = new HttpParams()
       .append("region_id", params.region)
@@ -49,11 +52,15 @@ export class RecsService {
 
     this.#http.get<Place[]>(`${this.backendUrl}/places?${queryString}`).pipe(
       tap(data => this.#listStore.updatePlaces(data)),
-    ).subscribe();
+    ).subscribe({
+      complete: () => {
+        this.isloadingPlaces.set(false);
+      }
+    });
   }
 
   async waitForSubregions(resolve: Function): Promise<void> {
-    if (!this.#loadingSubregions()) {
+    if (!this.#isLoadingSubregions()) {
       resolve();
     } else {
       setTimeout(() => this.waitForSubregions(resolve), 100)

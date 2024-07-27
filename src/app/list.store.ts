@@ -32,7 +32,6 @@ export const ListStore = signalStore(
                 sortedSubregionArr[subregion.id] = subregion;
             })
 
-            console.log(sortedSubregionArr);
             patchState(store, { subregions: sortedSubregionArr })
         },
 

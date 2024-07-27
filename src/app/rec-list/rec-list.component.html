@@ -1,5 +1,9 @@
 <div class="list-container">
-    @if (filterStore.region() === -1) {
+    @if (recsService.isloadingPlaces()) {
+        <div class="empty-list">
+            <mat-spinner></mat-spinner>
+        </div>
+    } @else if (filterStore.region() === -1) {
         <div class="empty-list">
             <mat-icon class="empty-icon" fontIcon="search"></mat-icon>
             <h3 class="empty-title">Select a region to begin</h3>

@@ -15,19 +15,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   styleUrl: './rec-list.component.scss'
 })
 export class RecListComponent {
+
   filterStore = inject(FilterStore);
   listStore = inject(ListStore);
   recsService = inject(RecsService);
 
-  testList: Place[] = [{
-    description: "lorem ipsum or whatever",
-    google_uid: "123",
-    id: 1,
-    num_stars: 2,
-    region_id: 1,
-    subregion_id: 1,
-    subtitle: "Hoagies n shit",
-    superlative: "Cheesesteak",
-    title: "Stanley's"
-  }]
 }

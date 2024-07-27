@@ -82,4 +82,5 @@ export class SidebarComponent implements OnInit {
 
     this.#recsService.getSubregionsByRegion(event.value);
   }
+  
 }

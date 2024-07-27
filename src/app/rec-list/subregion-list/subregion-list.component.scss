@@ -37,7 +37,7 @@
                     color: #313131;
                     display: flex;
                     gap: 0.3rem;
-                    padding: 0.2rem 0.5rem;
+                    padding: 0.2rem 0.7rem;
                     border-radius: 15px;
                 }
 
@@ -59,6 +59,7 @@
             display: flex;
             font-weight: normal;
             color: #dfdfdf;
+            gap: 1rem;
 
             &-desc {
                 flex: 2;

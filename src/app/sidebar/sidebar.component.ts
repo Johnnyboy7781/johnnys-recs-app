@@ -18,6 +18,7 @@ import {
 } from '@angular/animations';
 import { getState } from '@ngrx/signals';
 import { ListStore } from '../list.store';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-sidebar',
@@ -28,6 +29,7 @@ import { ListStore } from '../list.store';
     MatSelectModule,
     MatCheckboxModule,
     MatDividerModule,
+    MatIconModule
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',

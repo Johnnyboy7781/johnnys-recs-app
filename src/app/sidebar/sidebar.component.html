@@ -36,14 +36,22 @@
                 <mat-form-field appearance="outline">
                     <mat-label># Stars</mat-label>
                     <mat-select [value]="filterStore.numStars()" (selectionChange)="filterStore.updateState({numStars: $event.value})">
+                        <mat-select-trigger>
+                            @if (filterStore.numStars() === -1) {
+                                Any
+                            } @else {
+                                @for (star of [].constructor(filterStore.numStars()); track $index) {
+                                    <mat-icon>star</mat-icon>
+                                } +
+                            }
+                        </mat-select-trigger>
                         <mat-option [value]="-1">Any</mat-option>
-                        <mat-option [value]="0">0</mat-option>
-                        <mat-option [value]="1">1</mat-option>
-                        <mat-option [value]="2">2</mat-option>
+                        <mat-option [value]="1"><mat-icon>star</mat-icon>+</mat-option>
+                        <mat-option [value]="2"><mat-icon>star</mat-icon><mat-icon>star</mat-icon>+</mat-option>
                     </mat-select>
                 </mat-form-field>
 
-                <mat-checkbox class="checkbox" [value]="filterStore.hasSuperlative().toString()" (change)="filterStore.updateState({hasSuperlative: $event.checked})" [@slideIn] color="primary">Has superlative</mat-checkbox>
+                <mat-checkbox class="checkbox" [checked]="filterStore.hasSuperlative()" (change)="filterStore.updateState({hasSuperlative: $event.checked})" [@slideIn] color="primary">Has superlative</mat-checkbox>
 
                 <button mat-stroked-button color="primary" (click)="filterStore.resetSubFilters()" [disabled]="filterStore.areSubfiltersDirty()">Clear</button>
             </div>

@@ -22,3 +22,13 @@ export type Place = {
 }
 
 export type ListData = [string, Place[]];
+
+export type PlaceInfo = {
+    nationalPhoneNumber?: string,
+    formattedAddress: string,
+    websiteUri?: string,
+    googleMapsUri: string,
+    regularOpeningHours: {
+        openNow: boolean
+    }
+}

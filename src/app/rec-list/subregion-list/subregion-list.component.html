@@ -2,7 +2,7 @@
 
 <mat-accordion class="list-container">
     @for (place of places(); track place) {
-        <mat-expansion-panel class="place">
+        <mat-expansion-panel class="place" (opened)="loadPlaceInfo(place.google_uid)">
             <mat-expansion-panel-header>
                 <div class="place-header">
                     <div class="place-header-titles">

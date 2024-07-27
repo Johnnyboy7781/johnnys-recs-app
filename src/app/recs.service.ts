@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { Region, Subregion, Place } from './data-types';
+import { Region, Subregion, Place, PlaceInfo } from './data-types';
 import { environment } from '../environments/environment';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { FilterStoreState } from './filters.store';
 import { ListStore } from './list.store';
 
@@ -65,5 +65,9 @@ export class RecsService {
     } else {
       setTimeout(() => this.waitForSubregions(resolve), 100)
     }
+  }
+
+  loadPlaceInfo(google_uid: string): Observable<PlaceInfo> {
+    return this.#http.get<PlaceInfo>(`${this.backendUrl}/places/${google_uid}`);
   }
 }

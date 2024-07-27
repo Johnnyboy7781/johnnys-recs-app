@@ -14,3 +14,11 @@ body {
     background-color: #202124;
     color: white;
 }
+
+// fix for expansion panels not animating correctly
+// see: https://github.com/angular/components/issues/11765
+.mat-expansion-panel .mat-expansion-panel-content {
+    &.ng-animating {
+        height: 0;
+    }
+}

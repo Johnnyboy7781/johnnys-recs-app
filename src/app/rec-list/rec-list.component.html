@@ -16,7 +16,7 @@
     } @else {
         @for (subregionMap of listStore.places(); track subregionMap[0]) {
             @if (subregionMap[1].length > 0) {
-                <app-subregion-list [subregionName]="subregionMap[0]" [places]="subregionMap[1]"></app-subregion-list>
+                <app-subregion-list [@fade] [subregionName]="subregionMap[0]" [places]="subregionMap[1]"></app-subregion-list>
             }
         }
     }

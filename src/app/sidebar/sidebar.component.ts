@@ -54,7 +54,6 @@ import { MatIconModule } from '@angular/material/icon';
   ],
 })
 export class SidebarComponent implements OnInit {
-  areSubFiltersDirty = signal<boolean>(false);
 
   #dialog = inject(MatDialog);
   #recsService = inject(RecsService);

@@ -1,5 +1,6 @@
-import { patchState, signalStore, withMethods, withState } from "@ngrx/signals";
+import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { Place, Region, Subregion } from "./data-types";
+import { computed } from "@angular/core";
 
 export type ListStoreState = {
     regions: Region[],
@@ -53,5 +54,19 @@ export const ListStore = signalStore(
 
             patchState(store, { places: map });
         }
+    })),
+
+    withComputed(({ places }) => ({
+        isListEmpty: computed((): boolean => {
+            let isEmpty = true;
+
+            places().forEach((placeArr) => {
+                if (isEmpty) {
+                    isEmpty = placeArr.length === 0;
+                }
+            })
+
+            return isEmpty;
+        })
     }))
 )

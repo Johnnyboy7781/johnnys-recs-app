@@ -63,6 +63,7 @@ export class SidebarComponent implements OnInit {
   listStore = inject(ListStore);
 
   constructor() {
+    // Load list data whenever filters change
     effect(() => {
       this.#recsService.loadListData(getState(this.filterStore));
     }, { allowSignalWrites: true });
@@ -76,6 +77,11 @@ export class SidebarComponent implements OnInit {
     this.#dialog.open(ListInfoDialog, { autoFocus: false });
   }
 
+  /**
+   * On region selection, resets sub filters and fetches all subregions for the selected region
+   * 
+   * @param event The selection event
+   */
   onRegionSelectionChange(event: MatSelectChange): void {
     this.filterStore.updateState({ region: event.value });
     this.filterStore.resetSubFilters();

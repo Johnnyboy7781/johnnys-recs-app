@@ -20,6 +20,11 @@ export class PlaceComponent {
 
   #recsService = inject(RecsService);
 
+  /**
+   * On opening of a panel, loads details for that place from the Google Places API
+   * 
+   * @param google_uid The UID for the place whose panel was opened, used in the request to Google
+   */
   loadPlaceInfo(google_uid: string): void {
     if (this.placeInfo() !== null) {
       return;

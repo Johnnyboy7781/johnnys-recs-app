@@ -36,21 +36,27 @@ export class AppComponent implements OnInit, OnDestroy {
   #breakpointObserver = inject(BreakpointObserver);
 
   ngOnInit(): void {
-      this.#breakpointObserver.observe([
-        CUSTOM_BREAKPOINTS.LARGE,
-        CUSTOM_BREAKPOINTS.SMALL
-      ])
-      .pipe(takeUntil(this.destroyed))
-      .subscribe((result) => {
-        this.handleScreenWidthChange(result);
-      })
+    // Listen for screen width changes
+    this.#breakpointObserver.observe([
+      CUSTOM_BREAKPOINTS.LARGE,
+      CUSTOM_BREAKPOINTS.SMALL
+    ])
+    .pipe(takeUntil(this.destroyed))
+    .subscribe((result) => {
+      this.handleScreenWidthChange(result);
+    })
   }
 
   ngOnDestroy(): void {
-      this.destroyed.next();
-      this.destroyed.complete();
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
+  /**
+   * On screen width change, set panel settings appropriately
+   * 
+   * @param state The current breakpoint state showing which breakpoint was matched
+   */
   handleScreenWidthChange(state: BreakpointState): void {
     for(const query of Object.keys(state.breakpoints)) {
       if (state.breakpoints[query]) {

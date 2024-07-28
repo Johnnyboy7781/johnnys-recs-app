@@ -36,6 +36,7 @@ export const ListStore = signalStore(
         },
 
         updatePlaces(newPlaces: Place[]): void {
+            // Return early on bad data
             if (store.subregions().length === 0) {
                 patchState(store, { places: new Map() })
                 return;
@@ -43,10 +44,12 @@ export const ListStore = signalStore(
 
             const map = new Map<string, Place[]>()
             
+            // Create new map item for each subregion
             store.subregions().forEach((subregion) => {
                 map.set(subregion.name, new Array<Place>())
             })
 
+            // Sort places into appropriate subregion map item
             newPlaces.forEach((place) => {
                 const subregionName = store.subregions()[place.subregion_id].name;
                 map.get(subregionName)!.push(place)

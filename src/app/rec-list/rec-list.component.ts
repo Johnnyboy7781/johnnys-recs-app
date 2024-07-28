@@ -3,7 +3,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { FilterStore } from '../filters.store';
 import { SubregionListComponent } from "./subregion-list/subregion-list.component";
 import { ListStore } from '../list.store';
-import { Place } from '../data-types';
 import { RecsService } from '../recs.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { animate, query, style, transition, trigger } from '@angular/animations';

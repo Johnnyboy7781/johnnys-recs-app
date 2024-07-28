@@ -31,6 +31,25 @@
         display: block;
         margin-bottom: 1rem;
     }
+
+    & .contact-me {
+        margin-top: 2rem;
+        font-size: 0.8em;
+
+        & > * {
+            color: #818181;
+            margin-bottom: 0.5rem;
+        }
+
+        &-link {
+            text-decoration: underline;
+            cursor: pointer;
+
+            &:hover {
+                color: #e040fb;
+            }
+        }
+    }
 }
 
 mat-select-trigger {

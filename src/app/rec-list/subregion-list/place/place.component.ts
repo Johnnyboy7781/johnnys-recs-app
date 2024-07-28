@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, input, signal, TemplateRef, viewChild } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { Place, PlaceInfo } from '../../../data-types';
@@ -17,6 +17,7 @@ export class PlaceComponent {
 
   place = input.required<Place>();
   placeInfo = signal<PlaceInfo | null>(null);
+  placeTemplate = viewChild.required<TemplateRef<any>>('placeTemplate');
 
   #recsService = inject(RecsService);
 

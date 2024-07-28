@@ -2,6 +2,7 @@
 
 <mat-accordion class="list-container">
     @for (place of places(); track place) {
-        <app-place [place]="place"></app-place>
+        <app-place #placeWrapper [place]="place"></app-place>
+        <ng-content *ngTemplateOutlet="placeWrapper.placeTemplate()"></ng-content>
     }
 </mat-accordion>

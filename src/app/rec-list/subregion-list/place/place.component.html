@@ -1,53 +1,55 @@
-<mat-expansion-panel class="place" (opened)="loadPlaceInfo(place().google_uid)">
-    <mat-expansion-panel-header>
-        <div class="place-header">
-            <div class="place-header-titles">
-                <h3>{{ place().title }}</h3>
-                <h4>{{ place().subtitle }}</h4>
-            </div>
-            <div class="place-header-awards">
-                @if (place().superlative) {
-                    <div class="place-header-awards-superlative">
-                        <mat-icon>emoji_events</mat-icon>
-                        <p>Best {{ place().superlative }}</p>
-                    </div>
-                }
-                <div class="place-header-awards-stars">
-                    @for (star of [].constructor(place().num_stars); track $index) {
-                        <mat-icon>star</mat-icon>
+<ng-template #placeTemplate>
+    <mat-expansion-panel class="place" (opened)="loadPlaceInfo(place().google_uid)">
+        <mat-expansion-panel-header>
+            <div class="place-header">
+                <div class="place-header-titles">
+                    <h3>{{ place().title }}</h3>
+                    <h4>{{ place().subtitle }}</h4>
+                </div>
+                <div class="place-header-awards">
+                    @if (place().superlative) {
+                        <div class="place-header-awards-superlative">
+                            <mat-icon>emoji_events</mat-icon>
+                            <p>Best {{ place().superlative }}</p>
+                        </div>
                     }
+                    <div class="place-header-awards-stars">
+                        @for (star of [].constructor(place().num_stars); track $index) {
+                            <mat-icon>star</mat-icon>
+                        }
+                    </div>
                 </div>
             </div>
-        </div>
-    </mat-expansion-panel-header>
-    <div class="place-body">
-        <div class="place-body-desc">{{ place().description }}</div>
-        <div class="place-body-info">
-            @if (placeInfo() === null) {
-                <div class="skeleton-line"></div>
-                <div class="skeleton-line"></div>
-                <div class="skeleton-line"></div>
-            } @else {
-                @if (placeInfo()?.regularOpeningHours?.openNow) {
-                    <p class="place-body-info-open open">Open now</p>
+        </mat-expansion-panel-header>
+        <div class="place-body">
+            <div class="place-body-desc">{{ place().description }}</div>
+            <div class="place-body-info">
+                @if (placeInfo() === null) {
+                    <div class="skeleton-line"></div>
+                    <div class="skeleton-line"></div>
+                    <div class="skeleton-line"></div>
                 } @else {
-                    <p class="place-body-info-open closed">Closed</p>
-                }
+                    @if (placeInfo()?.regularOpeningHours?.openNow) {
+                        <p class="place-body-info-open open">Open now</p>
+                    } @else {
+                        <p class="place-body-info-open closed">Closed</p>
+                    }
 
-                <p class="place-body-info-with-link" (click)="openLink(placeInfo()?.googleMapsUri!)">
-                    <span class="place-body-info-label">Address:</span>&nbsp;<span class="link">{{ placeInfo()?.formattedAddress }}</span>
-                </p>
-
-                @if (placeInfo()?.nationalPhoneNumber) {
-                    <p><span class="place-body-info-label">Phone:</span> {{ placeInfo()?.nationalPhoneNumber }}</p>
-                }
-
-                @if (placeInfo()?.websiteUri) {
-                    <p class="place-body-info-with-link" (click)="openLink(placeInfo()?.websiteUri!)">
-                        <span class="place-body-info-label">Website:</span>&nbsp;<span class="link">{{ placeInfo()?.websiteUri }}</span>
+                    <p class="place-body-info-with-link" (click)="openLink(placeInfo()?.googleMapsUri!)">
+                        <span class="place-body-info-label">Address:</span>&nbsp;<span class="link">{{ placeInfo()?.formattedAddress }}</span>
                     </p>
+
+                    @if (placeInfo()?.nationalPhoneNumber) {
+                        <p><span class="place-body-info-label">Phone:</span> {{ placeInfo()?.nationalPhoneNumber }}</p>
+                    }
+
+                    @if (placeInfo()?.websiteUri) {
+                        <p class="place-body-info-with-link" (click)="openLink(placeInfo()?.websiteUri!)">
+                            <span class="place-body-info-label">Website:</span>&nbsp;<span class="link">{{ placeInfo()?.websiteUri }}</span>
+                        </p>
+                    }
                 }
-            }
+            </div>
         </div>
-    </div>
-</mat-expansion-panel>
+    </mat-expansion-panel>
+</ng-template>

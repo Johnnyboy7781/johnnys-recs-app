@@ -1,15 +1,32 @@
+.menu-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 1rem;
+    z-index: 2;
+}
+
 .app-container {
-    --sideabar-width: 17rem;
+    --sideabar-width: 18rem;
 
-    display: flex;
-    width: 100%;
-    padding: 3rem 1rem 0 clamp(40px, 3.1%, 170px);
+    height: 100%;
+    z-index: unset;
 
-    & app-sidebar {
-        width: var(--sideabar-width);
+    & * {
+        background-color: #202124;
     }
 
-    & app-rec-list {
-        width: calc(100% - var(--sideabar-width));
+    & .mat-drawer-backdrop {
+        background-color: red;
+    }
+
+    & mat-sidenav {
+        width: var(--sideabar-width);
+        border: none;
+        padding: 3rem 1rem 0 0;
+
+        & app-sidebar {
+            margin-top: 3rem;
+        }
     }
 }

@@ -1,4 +1,14 @@
-<div class="app-container">
-  <app-sidebar></app-sidebar>
-  <app-rec-list></app-rec-list>
-</div>
+@if (panelMode() === 'over') {
+  <button [@fade] mat-icon-button class="menu-button" (click)="toggleMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+}
+
+<mat-sidenav-container class="app-container">
+  <mat-sidenav [(opened)]="isPanelOpen" [mode]="panelMode()">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-rec-list></app-rec-list>
+  </mat-sidenav-content>
+</mat-sidenav-container>

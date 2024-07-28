@@ -72,11 +72,18 @@ $breakpoint-max-width: 650px;
         }
 
         &-desc {
-            flex: 2;
+            flex: 3;
         }
 
         &-info {
-            flex: 1;
+            flex: 2;
+            min-width: 0;
+
+            & p {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
 
             & .skeleton-line {
                 animation: skeleton-loading 1s ease-in-out infinite alternate;

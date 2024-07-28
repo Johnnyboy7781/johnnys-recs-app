@@ -30,7 +30,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 export class AppComponent implements OnInit, OnDestroy {
 
   destroyed = new Subject<void>();
-  isPanelOpen = signal<boolean>(true);
+  isPanelOpen = signal<boolean>(false);
   panelMode = signal<MatDrawerMode>('side');
 
   #breakpointObserver = inject(BreakpointObserver);

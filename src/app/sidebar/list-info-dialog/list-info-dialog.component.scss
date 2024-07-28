@@ -1,5 +1,7 @@
 .dialog-container {
-    width: 40vw;
+    width: min(95%, fit-content);
+    max-height: 90dvh;
+    overflow: scroll;
     padding: 1rem;
 }
 

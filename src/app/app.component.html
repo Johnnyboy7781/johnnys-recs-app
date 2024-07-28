@@ -1,5 +1,5 @@
 @if (panelMode() === 'over') {
-  <button [@fade] mat-icon-button class="menu-button" (click)="toggleMenu()">
+  <button [@fade] mat-fab class="menu-button" (click)="toggleMenu()">
     <mat-icon>menu</mat-icon>
   </button>
 }
@@ -9,6 +9,6 @@
     <app-sidebar></app-sidebar>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-rec-list></app-rec-list>
+    <app-rec-list [ngClass]="{ 'centered': panelMode() === 'over' }"></app-rec-list>
   </mat-sidenav-content>
 </mat-sidenav-container>

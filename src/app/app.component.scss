@@ -1,9 +1,9 @@
 .menu-button {
     position: absolute;
-    top: 0;
-    left: 0;
-    margin: 1rem;
+    bottom: 2rem;
+    right: 2rem;
     z-index: 2;
+    border-radius: 1rem;
 }
 
 .app-container {
@@ -29,4 +29,17 @@
             margin-top: 3rem;
         }
     }
+
+    & mat-sidenav-content {
+        & app-rec-list {
+            display: block;
+            margin-top: 3rem;
+        }
+    }
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem !important;
 }

@@ -22,3 +22,18 @@ body {
         height: 0;
     }
 }
+
+.form-container-region-selector.no-selection .mdc-notched-outline__leading,
+.form-container-region-selector.no-selection .mdc-notched-outline__notch,
+.form-container-region-selector.no-selection .mdc-notched-outline__trailing {
+    animation: pulse 600ms ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        border-color: hsl(216, 4%, 27%);
+    }
+    100% {
+        border-color: #e040fb;
+    }
+}

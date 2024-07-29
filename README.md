@@ -1,6 +1,6 @@
-# Johnny's Recs App 😋
+# Johnny's Recs 😋
 
-The frontend to [Johnny's Recs Service](https://github.com/Johnnyboy7781/johnnys-recs-service)!
+The frontend that consumes data from [Johnny's Recs Service](https://github.com/Johnnyboy7781/johnnys-recs-service)!
 
 An Angular app that provides the user with a list of my food and drink recommendations for a given region. Uses Express.js as a web server.
 

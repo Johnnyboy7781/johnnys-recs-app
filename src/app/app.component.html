@@ -1,14 +1,14 @@
-@if (panelMode() === 'over') {
+@if (screenSize() === CUSTOM_BREAKPOINTS.SMALL) {
   <button [@fade] mat-fab class="menu-button" (click)="toggleMenu()">
     <mat-icon>menu</mat-icon>
   </button>
 }
 
 <mat-sidenav-container class="app-container">
-  <mat-sidenav [(opened)]="isPanelOpen" [mode]="panelMode()">
+  <mat-sidenav #sidenav [opened]="screenSize() === CUSTOM_BREAKPOINTS.LARGE" [mode]="screenSize() === CUSTOM_BREAKPOINTS.LARGE ? 'side' : 'over'">
     <app-sidebar></app-sidebar>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-rec-list [ngClass]="{ 'centered': panelMode() === 'over' }"></app-rec-list>
+    <app-rec-list [ngClass]="{ 'centered': screenSize() === CUSTOM_BREAKPOINTS.SMALL}"></app-rec-list>
   </mat-sidenav-content>
 </mat-sidenav-container>

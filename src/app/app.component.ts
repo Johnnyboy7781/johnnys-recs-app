@@ -1,8 +1,8 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { RecListComponent } from "./rec-list/rec-list.component";
-import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
+import { MatDrawerMode, MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Subject, takeUntil } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,9 +29,10 @@ import { animate, style, transition, trigger } from '@angular/animations';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
+  sidenav = viewChild.required<MatSidenav>('sidenav');
   destroyed = new Subject<void>();
-  isPanelOpen = signal<boolean>(false);
-  panelMode = signal<MatDrawerMode>('side');
+  screenSize = signal<CUSTOM_BREAKPOINTS | null>(null);
+  CUSTOM_BREAKPOINTS = CUSTOM_BREAKPOINTS;
 
   #breakpointObserver = inject(BreakpointObserver);
 
@@ -60,27 +61,18 @@ export class AppComponent implements OnInit, OnDestroy {
   handleScreenWidthChange(state: BreakpointState): void {
     for(const query of Object.keys(state.breakpoints)) {
       if (state.breakpoints[query]) {
-        switch(query) {
-          case CUSTOM_BREAKPOINTS.LARGE:
-            this.isPanelOpen.set(true);
-            this.panelMode.set('side')
-            break;
-          case CUSTOM_BREAKPOINTS.SMALL:
-            this.isPanelOpen.set(false);
-            this.panelMode.set('over')
-            break;
-        }
+        this.screenSize.set(query as CUSTOM_BREAKPOINTS);
       }
     }
   }
 
   toggleMenu(): void {
-    this.isPanelOpen.update((state) => !state);
+    this.sidenav().toggle();
   }
 
 }
 
 enum CUSTOM_BREAKPOINTS {
-  LARGE = '(min-width: 1100px)',
-  SMALL = '(max-width: 1100px)'
+  LARGE = '(min-width: 700px)',
+  SMALL = '(max-width: 699px)'
 }

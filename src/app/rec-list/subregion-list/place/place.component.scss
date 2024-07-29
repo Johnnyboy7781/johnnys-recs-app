@@ -1,4 +1,4 @@
-$breakpoint-max-width: 650px;
+@use '../../../../app-theme.scss' as theme;
 
 .place {
     background-color: #453648;
@@ -7,7 +7,7 @@ $breakpoint-max-width: 650px;
         height: fit-content;
         padding-block: 0.7rem;
 
-        @media (max-width: $breakpoint-max-width) {
+        @media (max-width: theme.$app-breakpoint-large) {
             padding-left: 0.7rem;
         }
     }
@@ -19,7 +19,7 @@ $breakpoint-max-width: 650px;
         width: 100%;
         margin-right: 1.5rem;
 
-        @media (max-width: $breakpoint-max-width) {
+        @media (max-width: theme.$app-breakpoint-large) {
             flex-direction: column;
             gap: 0.5rem;
             align-items: normal;
@@ -67,7 +67,7 @@ $breakpoint-max-width: 650px;
         color: #dfdfdf;
         gap: 1rem;
 
-        @media (max-width: $breakpoint-max-width) {
+        @media (max-width: theme.$app-breakpoint-large) {
             flex-direction: column-reverse;
         }
 

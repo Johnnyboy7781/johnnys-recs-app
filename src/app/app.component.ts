@@ -4,7 +4,7 @@ import { SidebarComponent } from "./sidebar/sidebar.component";
 import { RecListComponent } from "./rec-list/rec-list.component";
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, tap } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -65,7 +65,11 @@ export class AppComponent implements OnInit, OnDestroy {
           this.recsService.screenSize.set(query as CUSTOM_BREAKPOINTS);
         }
       }
-    })
+    });
+
+    this.recsService.sidenavSubject.pipe(
+      tap(() => this.sidenav().toggle())
+    ).subscribe();
   }
 
   ngOnDestroy(): void {

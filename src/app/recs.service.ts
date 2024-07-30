@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Region, Subregion, Place, PlaceInfo } from './data-types';
 import { environment } from '../environments/environment';
-import { Observable, tap } from 'rxjs';
+import { Observable, ReplaySubject, tap } from 'rxjs';
 import { FilterStore, FilterStoreState } from './filters.store';
 import { ListStore } from './list.store';
 import { MatSelectChange } from '@angular/material/select';
@@ -14,6 +14,7 @@ export class RecsService {
   #isLoadingSubregions = signal<boolean>(false);
   isloadingPlaces = signal<boolean>(false);
   screenSize = signal<CUSTOM_BREAKPOINTS | null>(null);
+  sidenavSubject = new ReplaySubject<void>();
 
   #http = inject(HttpClient);
   #listStore = inject(ListStore);
@@ -109,6 +110,10 @@ export class RecsService {
    */
   loadPlaceInfo(google_uid: string): Observable<PlaceInfo> {
     return this.#http.get<PlaceInfo>(`${this.backendUrl}/places/${google_uid}`);
+  }
+
+  toggleSidenav(): void {
+    this.sidenavSubject.next();
   }
 
 }

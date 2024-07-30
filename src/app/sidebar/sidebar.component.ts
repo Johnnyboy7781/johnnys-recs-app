@@ -79,5 +79,12 @@ export class SidebarComponent implements OnInit {
   openInfoDialog(): void {
     this.#dialog.open(ListInfoDialog, { autoFocus: false });
   }
+
+  handleClear(): void {
+    this.filterStore.resetSubFilters();
+    if (this.recsService.screenSize() === CUSTOM_BREAKPOINTS.SMALL) {
+      this.recsService.toggleSidenav();
+    }
+  }
   
 }

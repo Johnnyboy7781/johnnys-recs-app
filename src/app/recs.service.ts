@@ -13,6 +13,7 @@ export class RecsService {
   backendUrl = environment.backendUrl;
   #isLoadingSubregions = signal<boolean>(false);
   isloadingPlaces = signal<boolean>(false);
+  screenSize = signal<CUSTOM_BREAKPOINTS | null>(null);
 
   #http = inject(HttpClient);
   #listStore = inject(ListStore);
@@ -110,4 +111,9 @@ export class RecsService {
     return this.#http.get<PlaceInfo>(`${this.backendUrl}/places/${google_uid}`);
   }
 
+}
+
+export enum CUSTOM_BREAKPOINTS {
+  LARGE = '(min-width: 700px)',
+  SMALL = '(max-width: 699px)'
 }

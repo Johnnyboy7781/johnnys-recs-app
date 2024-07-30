@@ -1,13 +1,13 @@
 <mat-sidenav-container class="app-container">
-  <mat-sidenav #sidenav [opened]="screenSize() === CUSTOM_BREAKPOINTS.LARGE" [mode]="screenSize() === CUSTOM_BREAKPOINTS.LARGE ? 'side' : 'over'">
+  <mat-sidenav #sidenav [opened]="recsService.screenSize() === CUSTOM_BREAKPOINTS.LARGE" [mode]="recsService.screenSize() === CUSTOM_BREAKPOINTS.LARGE ? 'side' : 'over'">
     <app-sidebar></app-sidebar>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-rec-list [ngClass]="{ 'centered': screenSize() === CUSTOM_BREAKPOINTS.SMALL}"></app-rec-list>
+    <app-rec-list [ngClass]="{ 'centered': recsService.screenSize() === CUSTOM_BREAKPOINTS.SMALL}"></app-rec-list>
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-@if (screenSize() === CUSTOM_BREAKPOINTS.SMALL) {
+@if (recsService.screenSize() === CUSTOM_BREAKPOINTS.SMALL) {
   <div class="drawer">
     <mat-form-field subscriptSizing="dynamic" [ngClass]="{ 'no-selection' : filterStore.region() === -1 }" class="form-container-region-selector" appearance="outline">
         <mat-label>Region</mat-label>

@@ -7,18 +7,22 @@
     <button class="info-btn" mat-button color="primary" (click)="openInfoDialog()">How to use this list</button>
 
     <div class="form-container">
-        <mat-form-field [ngClass]="{ 'no-selection' : filterStore.region() === -1 }" class="form-container-region-selector" appearance="outline">
-            <mat-label>Region</mat-label>
-            <mat-select [value]="filterStore.region()" (selectionChange)="recsService.onRegionSelectionChange($event)">
-                @for (region of listStore.regions(); track region.id) {
-                    <mat-option [value]="region.id">{{region.name}}</mat-option>
-                }
-            </mat-select>
-        </mat-form-field>
+        @if (recsService.screenSize() === CUSTOM_BREAKPOINTS.LARGE) {
+            <mat-form-field [ngClass]="{ 'no-selection' : filterStore.region() === -1 }" class="form-container-region-selector" appearance="outline">
+                <mat-label>Region</mat-label>
+                <mat-select [value]="filterStore.region()" (selectionChange)="recsService.onRegionSelectionChange($event)">
+                    @for (region of listStore.regions(); track region.id) {
+                        <mat-option [value]="region.id">{{region.name}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        }
 
         @if (filterStore.region() !== -1) {
             <div [@slideIn]>
-                <mat-divider class="divider"></mat-divider>
+                @if (recsService.screenSize() === CUSTOM_BREAKPOINTS.LARGE) {
+                    <mat-divider class="divider"></mat-divider>
+                }
 
                 <mat-form-field appearance="outline">
                     <mat-label>Subregion</mat-label>

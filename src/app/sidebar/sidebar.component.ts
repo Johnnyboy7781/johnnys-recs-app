@@ -6,7 +6,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
 import { ListInfoDialog } from './list-info-dialog/list-info-dialog.component';
-import { RecsService } from '../recs.service';
+import { CUSTOM_BREAKPOINTS, RecsService } from '../recs.service';
 import { FilterStore } from '../filters.store';
 import {
   animate,
@@ -63,6 +63,7 @@ export class SidebarComponent implements OnInit {
   recsService = inject(RecsService);
   filterStore = inject(FilterStore);
   listStore = inject(ListStore);
+  CUSTOM_BREAKPOINTS = CUSTOM_BREAKPOINTS;
 
   constructor() {
     // Load list data whenever filters change

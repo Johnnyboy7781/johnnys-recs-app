@@ -1,9 +1,9 @@
-import { Component, inject, OnDestroy, OnInit, signal, viewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { RecListComponent } from "./rec-list/rec-list.component";
-import { MatDrawerMode, MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subject, takeUntil } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,7 +12,7 @@ import { FilterStore } from './filters.store';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { ListStore } from './list.store';
-import { RecsService } from './recs.service';
+import { CUSTOM_BREAKPOINTS, RecsService } from './recs.service';
 
 @Component({
   selector: 'app-root',
@@ -45,7 +45,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   sidenav = viewChild.required<MatSidenav>('sidenav');
   destroyed = new Subject<void>();
-  screenSize = signal<CUSTOM_BREAKPOINTS | null>(null);
   CUSTOM_BREAKPOINTS = CUSTOM_BREAKPOINTS;
 
   #breakpointObserver = inject(BreakpointObserver);
@@ -61,7 +60,11 @@ export class AppComponent implements OnInit, OnDestroy {
     ])
     .pipe(takeUntil(this.destroyed))
     .subscribe((result) => {
-      this.handleScreenWidthChange(result);
+      for(const query of Object.keys(result.breakpoints)) {
+        if (result.breakpoints[query]) {
+          this.recsService.screenSize.set(query as CUSTOM_BREAKPOINTS);
+        }
+      }
     })
   }
 
@@ -70,26 +73,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.destroyed.complete();
   }
 
-  /**
-   * On screen width change, set panel settings appropriately
-   * 
-   * @param state The current breakpoint state showing which breakpoint was matched
-   */
-  handleScreenWidthChange(state: BreakpointState): void {
-    for(const query of Object.keys(state.breakpoints)) {
-      if (state.breakpoints[query]) {
-        this.screenSize.set(query as CUSTOM_BREAKPOINTS);
-      }
-    }
-  }
-
   toggleMenu(): void {
     this.sidenav().toggle();
   }
 
-}
-
-enum CUSTOM_BREAKPOINTS {
-  LARGE = '(min-width: 700px)',
-  SMALL = '(max-width: 699px)'
 }

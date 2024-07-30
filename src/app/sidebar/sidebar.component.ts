@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -65,13 +65,6 @@ export class SidebarComponent implements OnInit {
   listStore = inject(ListStore);
   CUSTOM_BREAKPOINTS = CUSTOM_BREAKPOINTS;
 
-  constructor() {
-    // Load list data whenever filters change
-    effect(() => {
-      this.recsService.loadListData(getState(this.filterStore));
-    }, { allowSignalWrites: true });
-  }
-
   ngOnInit(): void {
     this.recsService.getRegions();
   }
@@ -82,6 +75,14 @@ export class SidebarComponent implements OnInit {
 
   handleClear(): void {
     this.filterStore.resetSubFilters();
+    this.recsService.loadListData(getState(this.filterStore))
+    if (this.recsService.screenSize() === CUSTOM_BREAKPOINTS.SMALL) {
+      this.recsService.toggleSidenav();
+    }
+  }
+
+  handleApplyFilters(): void {
+    this.recsService.loadListData(getState(this.filterStore));
     if (this.recsService.screenSize() === CUSTOM_BREAKPOINTS.SMALL) {
       this.recsService.toggleSidenav();
     }

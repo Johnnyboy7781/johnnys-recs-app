@@ -6,6 +6,7 @@ import { Observable, ReplaySubject, tap } from 'rxjs';
 import { FilterStore, FilterStoreState } from './filters.store';
 import { ListStore } from './list.store';
 import { MatSelectChange } from '@angular/material/select';
+import { getState } from '@ngrx/signals';
 
 @Injectable({ providedIn: 'root' })
 export class RecsService {
@@ -40,6 +41,8 @@ export class RecsService {
     this.#filterStore.resetSubFilters();
 
     this.getSubregionsByRegion(event.value);
+
+    this.loadListData(getState(this.#filterStore));
   }
 
   /**

@@ -31,7 +31,7 @@
 
     & mat-slide-toggle {
         display: block;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
     }
 
     & .contact-me {
@@ -62,4 +62,8 @@ mat-select-trigger {
 
 mat-option mat-icon {
     margin-right: 0.2rem;
+}
+
+button {
+    margin-left: 0.7rem;
 }

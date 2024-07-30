@@ -54,7 +54,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-checkbox class="checkbox" [checked]="filterStore.hasSuperlative()" (change)="filterStore.updateState({hasSuperlative: $event.checked})" [@slideIn] color="primary">Has superlative</mat-checkbox>
+                <mat-slide-toggle [checked]="filterStore.hasSuperlative()" (change)="filterStore.updateState({hasSuperlative: $event.checked})" [@slideIn] color="primary">Has superlative</mat-slide-toggle>
 
                 <button mat-stroked-button color="primary" (click)="handleClear()" [disabled]="filterStore.areSubfiltersDirty()">Clear</button>
             </div>

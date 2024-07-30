@@ -1,13 +1,13 @@
 import { Component, effect, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
 import { ListInfoDialog } from './list-info-dialog/list-info-dialog.component';
 import { CUSTOM_BREAKPOINTS, RecsService } from '../recs.service';
 import { FilterStore } from '../filters.store';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {
   animate,
   query,
@@ -28,9 +28,9 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatCheckboxModule,
     MatDividerModule,
     MatIconModule,
+    MatSlideToggleModule,
     CommonModule
   ],
   templateUrl: './sidebar.component.html',

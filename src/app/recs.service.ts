@@ -3,8 +3,9 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Region, Subregion, Place, PlaceInfo } from './data-types';
 import { environment } from '../environments/environment';
 import { Observable, tap } from 'rxjs';
-import { FilterStoreState } from './filters.store';
+import { FilterStore, FilterStoreState } from './filters.store';
 import { ListStore } from './list.store';
+import { MatSelectChange } from '@angular/material/select';
 
 @Injectable({ providedIn: 'root' })
 export class RecsService {
@@ -15,6 +16,7 @@ export class RecsService {
 
   #http = inject(HttpClient);
   #listStore = inject(ListStore);
+  #filterStore = inject(FilterStore);
 
   /**
    * Get all regions
@@ -24,6 +26,18 @@ export class RecsService {
       .pipe(
         tap((data) => this.#listStore.updateRegions(data))
       ).subscribe();
+  }
+
+  /**
+   * On region selection, resets sub filters and fetches all subregions for the selected region
+   * 
+   * @param event The selection event
+   */
+  onRegionSelectionChange(event: MatSelectChange): void {
+    this.#filterStore.updateState({ region: event.value });
+    this.#filterStore.resetSubFilters();
+
+    this.getSubregionsByRegion(event.value);
   }
 
   /**

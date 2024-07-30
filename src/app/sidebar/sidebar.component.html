@@ -9,13 +9,12 @@
     <div class="form-container">
         <mat-form-field [ngClass]="{ 'no-selection' : filterStore.region() === -1 }" class="form-container-region-selector" appearance="outline">
             <mat-label>Region</mat-label>
-            <mat-select [value]="filterStore.region()" (selectionChange)="onRegionSelectionChange($event)">
+            <mat-select [value]="filterStore.region()" (selectionChange)="recsService.onRegionSelectionChange($event)">
                 @for (region of listStore.regions(); track region.id) {
                     <mat-option [value]="region.id">{{region.name}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
-
 
         @if (filterStore.region() !== -1) {
             <div [@slideIn]>

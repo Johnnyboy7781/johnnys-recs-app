@@ -1,11 +1,30 @@
 @use '../app-theme.scss' as theme;
 
-.menu-button {
+.drawer {
     position: absolute;
-    bottom: 2rem;
-    right: 2rem;
+    display: flex;
+    align-items: center;
+    bottom: 0;
+    height: fit-content;
+    padding: 1rem;
+    width: 100%;
+    background-color: #28282c;
     z-index: 2;
-    border-radius: 1rem;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    gap: 1rem;
+
+    & mat-form-field {
+        flex-grow: 1;
+    }
+
+    &-button {
+        border-radius: 4px;
+
+        & mat-icon {
+            transform: scale(1.5);
+        }
+    }
 }
 
 .app-container {

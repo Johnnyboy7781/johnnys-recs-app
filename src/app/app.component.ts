@@ -8,11 +8,25 @@ import { Subject, takeUntil } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { FilterStore } from './filters.store';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { ListStore } from './list.store';
+import { RecsService } from './recs.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, SidebarComponent, RecListComponent, MatSidenavModule, MatIconModule, MatButtonModule],
+  imports: [
+    CommonModule, 
+    SidebarComponent, 
+    RecListComponent, 
+    MatSidenavModule, 
+    MatIconModule, 
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   animations: [
@@ -35,6 +49,9 @@ export class AppComponent implements OnInit, OnDestroy {
   CUSTOM_BREAKPOINTS = CUSTOM_BREAKPOINTS;
 
   #breakpointObserver = inject(BreakpointObserver);
+  filterStore = inject(FilterStore);
+  listStore = inject(ListStore);
+  recsService = inject(RecsService);
 
   ngOnInit(): void {
     // Listen for screen width changes

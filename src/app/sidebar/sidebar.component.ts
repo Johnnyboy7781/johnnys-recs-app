@@ -60,35 +60,23 @@ export class SidebarComponent implements OnInit {
   hasEffectFiredOnce = false;
 
   #dialog = inject(MatDialog);
-  #recsService = inject(RecsService);
+  recsService = inject(RecsService);
   filterStore = inject(FilterStore);
   listStore = inject(ListStore);
 
   constructor() {
     // Load list data whenever filters change
     effect(() => {
-      this.#recsService.loadListData(getState(this.filterStore));
+      this.recsService.loadListData(getState(this.filterStore));
     }, { allowSignalWrites: true });
   }
 
   ngOnInit(): void {
-    this.#recsService.getRegions();
+    this.recsService.getRegions();
   }
 
   openInfoDialog(): void {
     this.#dialog.open(ListInfoDialog, { autoFocus: false });
-  }
-
-  /**
-   * On region selection, resets sub filters and fetches all subregions for the selected region
-   * 
-   * @param event The selection event
-   */
-  onRegionSelectionChange(event: MatSelectChange): void {
-    this.filterStore.updateState({ region: event.value });
-    this.filterStore.resetSubFilters();
-
-    this.#recsService.getSubregionsByRegion(event.value);
   }
   
 }

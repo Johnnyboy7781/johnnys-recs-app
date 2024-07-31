@@ -52,7 +52,7 @@
       "form_factor": "wide"
     },
     {
-      "src": "assets/handset-screenshot.png",
+      "src": "assets/mobile-screenshot.png",
       "sizes": "390x844",
       "type": "image/png"
     }

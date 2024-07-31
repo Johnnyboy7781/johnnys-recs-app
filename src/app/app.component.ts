@@ -52,7 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
   listStore = inject(ListStore);
   recsService = inject(RecsService);
 
-  ngOnInit(): void {
+  constructor() {
     // Listen for screen width changes
     this.#breakpointObserver.observe([
       CUSTOM_BREAKPOINTS.LARGE,
@@ -66,7 +66,9 @@ export class AppComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
 
+  ngOnInit(): void {
     this.recsService.sidenavSubject.pipe(
       tap(() => this.sidenav().toggle())
     ).subscribe();

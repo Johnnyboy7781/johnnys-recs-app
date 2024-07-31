@@ -45,7 +45,7 @@ export const ListStore = signalStore(
             const map = new Map<string, Place[]>()
             
             // Create new map item for each subregion
-            store.subregions().forEach((subregion) => {
+            store.subregions().forEach((subregion: Subregion) => {
                 map.set(subregion.name, new Array<Place>())
             })
 

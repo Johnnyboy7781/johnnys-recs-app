@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit, viewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { RecListComponent } from "./rec-list/rec-list.component";
@@ -13,6 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { ListStore } from './list.store';
 import { CUSTOM_BREAKPOINTS, RecsService } from './recs.service';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +27,9 @@ import { CUSTOM_BREAKPOINTS, RecsService } from './recs.service';
     MatIconModule, 
     MatButtonModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatDividerModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -46,6 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
   sidenav = viewChild.required<MatSidenav>('sidenav');
   destroyed = new Subject<void>();
   CUSTOM_BREAKPOINTS = CUSTOM_BREAKPOINTS;
+  isOpen = signal<boolean>(false);
 
   #breakpointObserver = inject(BreakpointObserver);
   filterStore = inject(FilterStore);
@@ -81,6 +86,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   toggleMenu(): void {
     this.sidenav().toggle();
+  }
+
+  test() {
+    this.isOpen.update((curr) => !curr)
   }
 
 }

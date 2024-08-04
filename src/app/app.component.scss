@@ -3,9 +3,9 @@
 .drawer {
     position: absolute;
     display: flex;
-    align-items: center;
-    top: 0;
-    height: fit-content;
+    align-items: flex-end;
+    flex-direction: column;
+    top: -208px;
     padding: 1rem;
     width: 100%;
     background-color: #333336;
@@ -13,17 +13,41 @@
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     gap: 1rem;
+    transition: 250ms;
 
     & mat-form-field {
         flex-grow: 1;
     }
 
-    &-button {
-        border-radius: 4px;
+    &-main {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
 
-        & mat-icon {
-            transform: scale(1.5);
+        & .slide-toggle {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
         }
+    }
+    
+    &-bar {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        gap: 1rem;
+
+        &-button {
+            border-radius: 4px;
+
+            & mat-icon {
+                transform: scale(1.5);
+            }
+        }
+    }
+
+    &.opened {
+       top: 0; 
     }
 }
 

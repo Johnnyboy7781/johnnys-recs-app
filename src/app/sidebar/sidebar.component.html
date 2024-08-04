@@ -4,8 +4,6 @@
         <h2 class="subtitle">Welcome!</h2>
     </div>
 
-    <button class="info-btn" mat-button color="primary" (click)="openInfoDialog()">How to use this list</button>
-
     <div class="form-container">
         @if (recsService.screenSize() === CUSTOM_BREAKPOINTS.LARGE) {
             <mat-form-field [ngClass]="{ 'no-selection' : filterStore.region() === -1 }" class="form-container-region-selector" appearance="outline">

@@ -9,6 +9,9 @@
 
 @if (recsService.screenSize() === CUSTOM_BREAKPOINTS.SMALL) {
   <div class="drawer">
+    <button [@fade] [disabled]="filterStore.region() === -1" mat-fab class="drawer-button" (click)="recsService.toggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
     <mat-form-field subscriptSizing="dynamic" [ngClass]="{ 'no-selection' : filterStore.region() === -1 }" class="form-container-region-selector" appearance="outline">
         <mat-label>Region</mat-label>
         <mat-select [value]="filterStore.region()" (selectionChange)="recsService.onRegionSelectionChange($event)">
@@ -17,8 +20,5 @@
             }
         </mat-select>
     </mat-form-field>
-    <button [@fade] [disabled]="filterStore.region() === -1" mat-fab class="drawer-button" (click)="recsService.toggleSidenav()">
-      <mat-icon>filter_alt</mat-icon>
-    </button>
   </div>
 }

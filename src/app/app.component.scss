@@ -4,14 +4,14 @@
     position: absolute;
     display: flex;
     align-items: center;
-    bottom: 0;
+    top: 0;
     height: fit-content;
     padding: 1rem;
     width: 100%;
     background-color: #333336;
     z-index: 2;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     gap: 1rem;
 
     & mat-form-field {

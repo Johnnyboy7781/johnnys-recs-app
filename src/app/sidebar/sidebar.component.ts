@@ -3,8 +3,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatDialog } from '@angular/material/dialog';
-import { ListInfoDialog } from './list-info-dialog/list-info-dialog.component';
 import { CUSTOM_BREAKPOINTS, RecsService } from '../recs.service';
 import { FilterStore } from '../filters.store';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -59,7 +57,6 @@ export class SidebarComponent implements OnInit {
 
   hasEffectFiredOnce = false;
 
-  #dialog = inject(MatDialog);
   recsService = inject(RecsService);
   filterStore = inject(FilterStore);
   listStore = inject(ListStore);
@@ -67,10 +64,6 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.recsService.getRegions();
-  }
-
-  openInfoDialog(): void {
-    this.#dialog.open(ListInfoDialog, { autoFocus: false });
   }
 
   handleClear(): void {

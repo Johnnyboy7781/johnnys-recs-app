@@ -10,7 +10,7 @@ Visit the app at https://www.JohnnysRecs.com.
 
 To run locally, follow these steps:
 
-1. Run ```npm i``` to download dependencies.
+1. Run `npm i` to download dependencies.
 2. Run [```npm run dev```] to start the local server.
 
 Your application will then be available at [`http://localhost:4200`](http://localhost:4200).  
@@ -18,10 +18,10 @@ That's it! 🎉
 
 ## Made with:
 
-- [Node.js](https://nodejs.org/en)
-- [Typescript](https://www.typescriptlang.org/)
-- [Express.js](https://expressjs.com/)
-- [Angular](https://angular.dev/)
-- Love ❤️
+-   [Node.js](https://nodejs.org/en)
+-   [Typescript](https://www.typescriptlang.org/)
+-   [Express.js](https://expressjs.com/)
+-   [Angular](https://angular.dev/)
+-   Love ❤️
 
 ### Deployed on [Railway](https://railway.app/) 🚅

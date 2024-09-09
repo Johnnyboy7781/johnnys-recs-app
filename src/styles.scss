@@ -1,16 +1,21 @@
-@use '@angular/material' as mat;
-@use './app-theme.scss' as custom-theme;
+@use "@angular/material" as mat;
+@use "./app-theme.scss" as custom-theme;
 @include mat.all-component-themes(custom-theme.$app-theme);
 
-*, *::after, *::before {
+*,
+*::after,
+*::before {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html, body { height: 100%; }
-body { 
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
+html,
+body {
+    height: 100%;
+}
+body {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: #202124;
     color: white;
 }

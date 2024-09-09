@@ -1,65 +1,132 @@
 @if (recsService.screenSize() === CUSTOM_BREAKPOINTS.SMALL) {
-  <div class="drawer" [ngClass]="{ 'opened': isOpen() }">
-    <div class="drawer-main">
-      <mat-form-field appearance="outline">
-          <mat-label>Subregion</mat-label>
-          <mat-select [value]="filterStore.subregion()" (selectionChange)="filterStore.updateState({subregion: $event.value})">
-              <mat-option [value]="-1">Any</mat-option>
-              @for (subregion of listStore.subregions(); track subregion) {
-                  @if (subregion) {
-                      <mat-option [value]="subregion.id">{{subregion.name}}</mat-option>
-                  }
-              }
-          </mat-select>
-      </mat-form-field>
-  
-      <mat-form-field appearance="outline">
-          <mat-label># Stars</mat-label>
-          <mat-select [value]="filterStore.numStars()" (selectionChange)="filterStore.updateState({numStars: $event.value})">
-              <mat-select-trigger>
-                  @if (filterStore.numStars() === -1) {
-                      Any
-                  } @else {
-                      @for (star of [].constructor(filterStore.numStars()); track $index) {
-                          <mat-icon>star</mat-icon>
-                      } +
-                  }
-              </mat-select-trigger>
-              <mat-option [value]="-1">Any</mat-option>
-              <mat-option [value]="1"><mat-icon>star</mat-icon>+</mat-option>
-              <mat-option [value]="2"><mat-icon>star</mat-icon><mat-icon>star</mat-icon>+</mat-option>
-          </mat-select>
-      </mat-form-field>
+    <div class="drawer" [ngClass]="{ opened: isOpen() }">
+        <div class="drawer-main">
+            <mat-form-field appearance="outline">
+                <mat-label>Subregion</mat-label>
+                <mat-select
+                    [value]="filterStore.subregion()"
+                    (selectionChange)="
+                        filterStore.updateState({ subregion: $event.value })
+                    "
+                >
+                    <mat-option [value]="-1">Any</mat-option>
+                    @for (
+                        subregion of listStore.subregions();
+                        track subregion
+                    ) {
+                        @if (subregion) {
+                            <mat-option [value]="subregion.id">{{
+                                subregion.name
+                            }}</mat-option>
+                        }
+                    }
+                </mat-select>
+            </mat-form-field>
 
-      <div class="slide-toggle">
-        <p class="slide-toggle-label" (click)="slideToggle.toggle()">Has superlative</p>
-        <p><mat-slide-toggle #slideToggle [checked]="filterStore.hasSuperlative()" (change)="filterStore.updateState({hasSuperlative: $event.checked})" color="primary"></mat-slide-toggle></p>
-      </div>
+            <mat-form-field appearance="outline">
+                <mat-label># Stars</mat-label>
+                <mat-select
+                    [value]="filterStore.numStars()"
+                    (selectionChange)="
+                        filterStore.updateState({ numStars: $event.value })
+                    "
+                >
+                    <mat-select-trigger>
+                        @if (filterStore.numStars() === -1) {
+                            Any
+                        } @else {
+                            @for (
+                                star of [].constructor(filterStore.numStars());
+                                track $index
+                            ) {
+                                <mat-icon>star</mat-icon>
+                            }
+                            +
+                        }
+                    </mat-select-trigger>
+                    <mat-option [value]="-1">Any</mat-option>
+                    <mat-option [value]="1"
+                        ><mat-icon>star</mat-icon>+</mat-option
+                    >
+                    <mat-option [value]="2"
+                        ><mat-icon>star</mat-icon
+                        ><mat-icon>star</mat-icon>+</mat-option
+                    >
+                </mat-select>
+            </mat-form-field>
 
-      <mat-divider class="divider"></mat-divider>
+            <div class="slide-toggle">
+                <p class="slide-toggle-label" (click)="slideToggle.toggle()">
+                    Has superlative
+                </p>
+                <p>
+                    <mat-slide-toggle
+                        #slideToggle
+                        [checked]="filterStore.hasSuperlative()"
+                        (change)="
+                            filterStore.updateState({
+                                hasSuperlative: $event.checked
+                            })
+                        "
+                        color="primary"
+                    ></mat-slide-toggle>
+                </p>
+            </div>
+
+            <mat-divider class="divider"></mat-divider>
+        </div>
+
+        <div class="drawer-bar">
+            <button
+                [@fade]
+                [disabled]="filterStore.region() === -1"
+                mat-fab
+                class="drawer-bar-button"
+                (click)="test()"
+            >
+                <mat-icon>menu</mat-icon>
+            </button>
+            <mat-form-field
+                subscriptSizing="dynamic"
+                [ngClass]="{ 'no-selection': filterStore.region() === -1 }"
+                class="region-selector"
+                appearance="outline"
+            >
+                <mat-label>Region</mat-label>
+                <mat-select
+                    [value]="filterStore.region()"
+                    (selectionChange)="
+                        recsService.onRegionSelectionChange($event)
+                    "
+                >
+                    @for (region of listStore.regions(); track region.id) {
+                        <mat-option [value]="region.id">{{
+                            region.name
+                        }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
     </div>
-
-    <div class="drawer-bar">
-      <button [@fade] [disabled]="filterStore.region() === -1" mat-fab class="drawer-bar-button" (click)="test()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <mat-form-field subscriptSizing="dynamic" [ngClass]="{ 'no-selection' : filterStore.region() === -1 }" class="region-selector" appearance="outline">
-          <mat-label>Region</mat-label>
-          <mat-select [value]="filterStore.region()" (selectionChange)="recsService.onRegionSelectionChange($event)">
-              @for (region of listStore.regions(); track region.id) {
-                  <mat-option [value]="region.id">{{region.name}}</mat-option>
-              }
-          </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
 }
 
 <mat-sidenav-container class="app-container">
-  <mat-sidenav #sidenav [opened]="recsService.screenSize() === CUSTOM_BREAKPOINTS.LARGE" [mode]="recsService.screenSize() === CUSTOM_BREAKPOINTS.LARGE ? 'side' : 'over'">
-    <app-sidebar></app-sidebar>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <app-rec-list [ngClass]="{ 'centered': recsService.screenSize() === CUSTOM_BREAKPOINTS.SMALL}"></app-rec-list>
-  </mat-sidenav-content>
+    <mat-sidenav
+        #sidenav
+        [opened]="recsService.screenSize() === CUSTOM_BREAKPOINTS.LARGE"
+        [mode]="
+            recsService.screenSize() === CUSTOM_BREAKPOINTS.LARGE
+                ? 'side'
+                : 'over'
+        "
+    >
+        <app-sidebar></app-sidebar>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-rec-list
+            [ngClass]="{
+                centered: recsService.screenSize() === CUSTOM_BREAKPOINTS.SMALL
+            }"
+        ></app-rec-list>
+    </mat-sidenav-content>
 </mat-sidenav-container>

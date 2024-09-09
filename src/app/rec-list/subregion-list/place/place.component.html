@@ -1,5 +1,8 @@
 <ng-template #placeTemplate>
-    <mat-expansion-panel class="place" (opened)="loadPlaceInfo(place().google_uid)">
+    <mat-expansion-panel
+        class="place"
+        (opened)="loadPlaceInfo(place().google_uid)"
+    >
         <mat-expansion-panel-header>
             <div class="place-header">
                 <div class="place-header-titles">
@@ -14,7 +17,10 @@
                         </div>
                     }
                     <div class="place-header-awards-stars">
-                        @for (star of [].constructor(place().num_stars); track $index) {
+                        @for (
+                            star of [].constructor(place().num_stars);
+                            track $index
+                        ) {
                             <mat-icon>star</mat-icon>
                         }
                     </div>
@@ -35,17 +41,32 @@
                         <p class="place-body-info-open closed">Closed</p>
                     }
 
-                    <p class="place-body-info-with-link" (click)="openLink(placeInfo()?.googleMapsUri!)">
-                        <span class="place-body-info-label">Address:</span>&nbsp;<span class="link">{{ placeInfo()?.formattedAddress }}</span>
+                    <p
+                        class="place-body-info-with-link"
+                        (click)="openLink(placeInfo()?.googleMapsUri!)"
+                    >
+                        <span class="place-body-info-label">Address:</span
+                        >&nbsp;<span class="link">{{
+                            placeInfo()?.formattedAddress
+                        }}</span>
                     </p>
 
                     @if (placeInfo()?.nationalPhoneNumber) {
-                        <p><span class="place-body-info-label">Phone:</span> {{ placeInfo()?.nationalPhoneNumber }}</p>
+                        <p>
+                            <span class="place-body-info-label">Phone:</span>
+                            {{ placeInfo()?.nationalPhoneNumber }}
+                        </p>
                     }
 
                     @if (placeInfo()?.websiteUri) {
-                        <p class="place-body-info-with-link" (click)="openLink(placeInfo()?.websiteUri!)">
-                            <span class="place-body-info-label">Website:</span>&nbsp;<span class="link">{{ placeInfo()?.websiteUri }}</span>
+                        <p
+                            class="place-body-info-with-link"
+                            (click)="openLink(placeInfo()?.websiteUri!)"
+                        >
+                            <span class="place-body-info-label">Website:</span
+                            >&nbsp;<span class="link">{{
+                                placeInfo()?.websiteUri
+                            }}</span>
                         </p>
                     }
                 }

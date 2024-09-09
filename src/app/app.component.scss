@@ -1,4 +1,4 @@
-@use '../app-theme.scss' as theme;
+@use "../app-theme.scss" as theme;
 
 .drawer {
     position: absolute;
@@ -30,7 +30,7 @@
             margin-bottom: 1rem;
         }
     }
-    
+
     &-bar {
         display: flex;
         align-items: center;
@@ -47,7 +47,7 @@
     }
 
     &.opened {
-       top: 0; 
+        top: 0;
     }
 }
 

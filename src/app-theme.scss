@@ -1,4 +1,4 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
 $app-breakpoint-large: 900px;
 $app-breakpoint-small: 700px;
@@ -6,9 +6,11 @@ $app-breakpoint-small: 700px;
 $app-primary: mat.m2-define-palette(mat.$m2-purple-palette, A200);
 $app-accent: mat.m2-define-palette(mat.$m2-purple-palette, A200);
 
-$app-theme: mat.m2-define-dark-theme((
-    color: (
-        primary: $app-primary,
-        accent: $app-accent
+$app-theme: mat.m2-define-dark-theme(
+    (
+        color: (
+            primary: $app-primary,
+            accent: $app-accent
+        )
     )
-));
+);

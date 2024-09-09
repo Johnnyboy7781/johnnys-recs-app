@@ -6,11 +6,22 @@
 
     <div class="form-container">
         @if (recsService.screenSize() === CUSTOM_BREAKPOINTS.LARGE) {
-            <mat-form-field [ngClass]="{ 'no-selection' : filterStore.region() === -1 }" class="form-container-region-selector" appearance="outline">
+            <mat-form-field
+                [ngClass]="{ 'no-selection': filterStore.region() === -1 }"
+                class="form-container-region-selector"
+                appearance="outline"
+            >
                 <mat-label>Region</mat-label>
-                <mat-select [value]="filterStore.region()" (selectionChange)="recsService.onRegionSelectionChange($event)">
+                <mat-select
+                    [value]="filterStore.region()"
+                    (selectionChange)="
+                        recsService.onRegionSelectionChange($event)
+                    "
+                >
                     @for (region of listStore.regions(); track region.id) {
-                        <mat-option [value]="region.id">{{region.name}}</mat-option>
+                        <mat-option [value]="region.id">{{
+                            region.name
+                        }}</mat-option>
                     }
                 </mat-select>
             </mat-form-field>
@@ -24,45 +35,98 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Subregion</mat-label>
-                    <mat-select [value]="filterStore.subregion()" (selectionChange)="filterStore.updateState({subregion: $event.value})">
+                    <mat-select
+                        [value]="filterStore.subregion()"
+                        (selectionChange)="
+                            filterStore.updateState({ subregion: $event.value })
+                        "
+                    >
                         <mat-option [value]="-1">Any</mat-option>
-                        @for (subregion of listStore.subregions(); track subregion) {
+                        @for (
+                            subregion of listStore.subregions();
+                            track subregion
+                        ) {
                             @if (subregion) {
-                                <mat-option [value]="subregion.id">{{subregion.name}}</mat-option>
+                                <mat-option [value]="subregion.id">{{
+                                    subregion.name
+                                }}</mat-option>
                             }
                         }
                     </mat-select>
                 </mat-form-field>
-            
+
                 <mat-form-field appearance="outline">
                     <mat-label># Stars</mat-label>
-                    <mat-select [value]="filterStore.numStars()" (selectionChange)="filterStore.updateState({numStars: $event.value})">
+                    <mat-select
+                        [value]="filterStore.numStars()"
+                        (selectionChange)="
+                            filterStore.updateState({ numStars: $event.value })
+                        "
+                    >
                         <mat-select-trigger>
                             @if (filterStore.numStars() === -1) {
                                 Any
                             } @else {
-                                @for (star of [].constructor(filterStore.numStars()); track $index) {
+                                @for (
+                                    star of [].constructor(
+                                        filterStore.numStars()
+                                    );
+                                    track $index
+                                ) {
                                     <mat-icon>star</mat-icon>
-                                } +
+                                }
+                                +
                             }
                         </mat-select-trigger>
                         <mat-option [value]="-1">Any</mat-option>
-                        <mat-option [value]="1"><mat-icon>star</mat-icon>+</mat-option>
-                        <mat-option [value]="2"><mat-icon>star</mat-icon><mat-icon>star</mat-icon>+</mat-option>
+                        <mat-option [value]="1"
+                            ><mat-icon>star</mat-icon>+</mat-option
+                        >
+                        <mat-option [value]="2"
+                            ><mat-icon>star</mat-icon
+                            ><mat-icon>star</mat-icon>+</mat-option
+                        >
                     </mat-select>
                 </mat-form-field>
 
-                <mat-slide-toggle [checked]="filterStore.hasSuperlative()" (change)="filterStore.updateState({hasSuperlative: $event.checked})" [@slideIn] color="primary"> Has superlative</mat-slide-toggle>
+                <mat-slide-toggle
+                    [checked]="filterStore.hasSuperlative()"
+                    (change)="
+                        filterStore.updateState({
+                            hasSuperlative: $event.checked
+                        })
+                    "
+                    [@slideIn]
+                    color="primary"
+                >
+                    Has superlative</mat-slide-toggle
+                >
 
-                <button mat-stroked-button color="primary" (click)="handleClear()" [disabled]="filterStore.areSubfiltersDirty()">Clear</button>
-                <button mat-flat-button color="primary" (click)="handleApplyFilters()" [disabled]="filterStore.areSubfiltersDirty()">Apply</button>
+                <button
+                    mat-stroked-button
+                    color="primary"
+                    (click)="handleClear()"
+                    [disabled]="filterStore.areSubfiltersDirty()"
+                >
+                    Clear
+                </button>
+                <button
+                    mat-flat-button
+                    color="primary"
+                    (click)="handleApplyFilters()"
+                    [disabled]="filterStore.areSubfiltersDirty()"
+                >
+                    Apply
+                </button>
             </div>
         }
 
         <div class="contact-me">
             <p>Notice an issue?</p>
             <p>Have ideas to improve this site?</p>
-            <a href="mailto:dev@johnnysrecs.com" class="contact-me-link">Email me at dev&#64;johnnysrecs.com</a>
+            <a href="mailto:dev@johnnysrecs.com" class="contact-me-link"
+                >Email me at dev&#64;johnnysrecs.com</a
+            >
         </div>
     </div>
 </div>

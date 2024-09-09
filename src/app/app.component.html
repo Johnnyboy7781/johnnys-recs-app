@@ -1,7 +1,7 @@
 @if (recsService.screenSize() === CUSTOM_BREAKPOINTS.SMALL) {
-    <div class="drawer" [ngClass]="{ opened: isOpen() }">
-        <div class="drawer-main">
-            <mat-form-field appearance="outline">
+    <div class="drawer" [ngClass]="{ 'drawer--opened': isOpen() }">
+        <div class="drawer__main">
+            <mat-form-field class="drawer__field" appearance="outline">
                 <mat-label>Subregion</mat-label>
                 <mat-select
                     [value]="filterStore.subregion()"
@@ -23,7 +23,7 @@
                 </mat-select>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field class="drawer__field" appearance="outline">
                 <mat-label># Stars</mat-label>
                 <mat-select
                     [value]="filterStore.numStars()"
@@ -55,8 +55,11 @@
                 </mat-select>
             </mat-form-field>
 
-            <div class="slide-toggle">
-                <p class="slide-toggle-label" (click)="slideToggle.toggle()">
+            <div class="drawer__slide-toggle">
+                <p
+                    class="drawer__slide-toggle-label"
+                    (click)="slideToggle.toggle()"
+                >
                     Has superlative
                 </p>
                 <p>
@@ -73,23 +76,25 @@
                 </p>
             </div>
 
-            <mat-divider class="divider"></mat-divider>
+            <mat-divider class="drawer__divider"></mat-divider>
         </div>
 
-        <div class="drawer-bar">
+        <div class="drawer__bar">
             <button
                 [@fade]
                 [disabled]="filterStore.region() === -1"
                 mat-fab
-                class="drawer-bar-button"
+                class="drawer__menu-btn"
                 (click)="test()"
             >
-                <mat-icon>menu</mat-icon>
+                <mat-icon class="drawer__icon">menu</mat-icon>
             </button>
             <mat-form-field
                 subscriptSizing="dynamic"
-                [ngClass]="{ 'no-selection': filterStore.region() === -1 }"
-                class="region-selector"
+                [ngClass]="{
+                    'drawer--no-selection': filterStore.region() === -1
+                }"
+                class="drawer__field drawer__region-selector"
                 appearance="outline"
             >
                 <mat-label>Region</mat-label>
@@ -110,9 +115,10 @@
     </div>
 }
 
-<mat-sidenav-container class="app-container">
+<mat-sidenav-container class="app">
     <mat-sidenav
         #sidenav
+        class="app__sidebar-container"
         [opened]="recsService.screenSize() === CUSTOM_BREAKPOINTS.LARGE"
         [mode]="
             recsService.screenSize() === CUSTOM_BREAKPOINTS.LARGE
@@ -120,12 +126,14 @@
                 : 'over'
         "
     >
-        <app-sidebar></app-sidebar>
+        <app-sidebar class="app__sidebar"></app-sidebar>
     </mat-sidenav>
-    <mat-sidenav-content>
+    <mat-sidenav-content class="app__content">
         <app-rec-list
+            class="app__list"
             [ngClass]="{
-                centered: recsService.screenSize() === CUSTOM_BREAKPOINTS.SMALL
+                'app__list--centered':
+                    recsService.screenSize() === CUSTOM_BREAKPOINTS.SMALL
             }"
         ></app-rec-list>
     </mat-sidenav-content>

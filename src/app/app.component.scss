@@ -14,81 +14,74 @@
     border-bottom-right-radius: 15px;
     gap: 1rem;
     transition: 250ms;
+}
 
-    & mat-form-field {
-        flex-grow: 1;
-    }
+.drawer__field {
+    flex-grow: 1;
+}
 
-    &-main {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
+.drawer--opened {
+    top: 0;
+}
 
-        & .slide-toggle {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-    }
+.drawer__main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
 
-    &-bar {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        gap: 1rem;
+.drawer__slide-toggle {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
 
-        &-button {
-            border-radius: 4px;
+.drawer__bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+}
 
-            & mat-icon {
-                transform: scale(1.5);
-            }
-        }
-    }
+.drawer__menu-btn {
+    border-radius: 4px;
+}
 
-    &.opened {
-        top: 0;
-    }
+.drawer__icon {
+    transform: scale(1.5);
 }
 
 .app-container {
-    --sideabar-width: 18rem;
-
     height: 100%;
     z-index: unset;
+}
 
-    & * {
-        background-color: #202124;
-    }
+.app__sidebar-container,
+.app__content {
+    background-color: #202124;
+}
 
-    & .mat-drawer-backdrop {
-        background-color: red;
-    }
+.app__sidebar-container {
+    width: 18rem;
+    border: none;
+    padding: 3rem 1rem 0 1rem;
 
-    & mat-sidenav {
-        width: var(--sideabar-width);
-        border: none;
-        padding: 3rem 1rem 0 1rem;
-
-        @media (max-width: theme.$app-breakpoint-small) {
-            width: fit-content;
-        }
-
-        & app-sidebar {
-            margin-top: 3rem;
-        }
-    }
-
-    & mat-sidenav-content {
-        & app-rec-list {
-            display: block;
-            margin-top: 3rem;
-            margin-inline: 1rem;
-        }
+    @media (max-width: theme.$app-breakpoint-small) {
+        width: fit-content;
     }
 }
 
-.centered {
+.app__sidebar {
+    margin-top: 3rem;
+}
+
+.app__list {
+    display: block;
+    margin-top: 3rem;
+    margin-inline: 1rem;
+}
+
+.app__list--centered {
     display: flex;
     justify-content: center;
     margin-top: 1.5rem !important;
